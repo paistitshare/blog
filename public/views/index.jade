@@ -1,0 +1,574 @@
+extends layout
+
+block content
+    .header
+      .header-top
+        .container
+          .head-left
+            ul.number
+              li
+                span
+                  i.phone  
+                  | +0123 456 789
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href='mailto:info@example.com')
+                  i.mail  
+                  | hello@address.com
+              | &#x9;
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              .clearfix  
+          | &#x9;&#x9;&#x9;&#x9;&#x9;
+          .head-right
+            ul
+              li
+                a(href='#')
+                  i.fb  
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href='#')
+                  i.twt  
+              | &#x9;
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href='#')
+                  i.ttt  
+              | &#x9;
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href='#')
+                  i.ve  
+              | &#x9;
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href='#')
+                  i.in  
+              | &#x9;
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href='#')
+                  i.dib  
+              | &#x9;
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href='#')
+                  i.fli  
+              | &#x9;
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href='#')
+                  i.rss  
+              | &#x9;
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              .clearfix  
+          | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+          .clearfix  
+      | &#x9;&#x9;&#x9;
+      .header-bottom
+        .container
+          .logo
+            a(href='index.html')
+              img.img-responsive(src='images/logo.png', alt='')
+          | &#x9;&#x9;&#x9;&#x9;&#x9;
+          .head-nav
+            span.menu  
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            ul.cl-effect-3
+              li.active
+                a(href='index.html') Home
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href=' about.html') About us
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href=' employeers.html') Employeers 
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href=' 404.html') Job Seekers 
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href=' blog.html') Blog
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                a(href=' contact.html') Contact
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              .clearfix  
+            // script-for-nav
+            script.
+              $( "span.menu" ).click(function() {
+              $( ".head-nav ul" ).slideToggle(300, function() {
+              // Animation complete.
+              });
+              });
+            // script-for-nav
+          | &#x9;&#x9;&#x9;&#x9;&#x9;
+          .header-right1
+            li
+              a(href='login.html') Login
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href='register.html') Sign In
+          | &#x9;&#x9;&#x9;&#x9;&#x9;
+          .clearfix  
+    // header
+    // banner
+    .banner
+      .container
+        // banner Slider starts Here
+        script(src='js/responsiveslides.min.js')
+        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+        script.
+          // You can also use "$(window).load(function() {"
+          $(function () {
+          // Slideshow 4
+          $("#slider4").responsiveSlides({
+          auto: true,
+          pager: true,
+          nav: true,
+          speed: 500,
+          namespace: "callbacks",
+          before: function () {
+          $('.events').append("<li>before event fired.</li>");
+          },
+          after: function () {
+          $('.events').append("<li>after event fired.</li>");
+          }
+          });
+          });
+        // //End-slider-script
+        #top.callbacks_container
+          ul#slider4.rslides
+            li
+              .banner-info
+                h1 Job Searching Just Got So Easy
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                p
+                  | Consectetur adipisicing elit, sed do lorem ipsum dolor sit amet,  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut .
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              .banner-info
+                h1 Tempor incididunt ut labore
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                p
+                  | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut .
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              .banner-info
+                h1 Consectetur adipisicing elit
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                p
+                  | Eiusmod tempor incididunt lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do  ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.
+        | &#x9;&#x9;&#x9;    
+        .clearfix  
+        // banner Slider Ends Here
+    // banner
+    // our
+    .our
+      .container
+        h5 our process
+        | &#x9;&#x9;&#x9;
+        h2 How We Work for you?
+        | &#x9;&#x9;&#x9;
+        p
+          | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+        | &#x9;&#x9;&#x9;
+        .our-top
+          .col-md-4.our-left
+            i.best
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            h3 Searching for the best job
+            | &#x9;
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            p
+              | Using the outcomes from the job, we will put together a plan for the most effective marketing strategy to get the best results.
+          | &#x9;&#x9;&#x9;&#x9;
+          .col-md-4.our-left
+            i.resu
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            h3 Searching for the best job
+            | &#x9;
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            p
+              | Using the outcomes from the job, we will put together a plan for the most effective marketing strategy to get the best results.
+          | &#x9;&#x9;&#x9;&#x9;
+          .col-md-4.our-left
+            i.interv
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            h3 Searching for the best job
+            | &#x9;
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            p
+              | Using the outcomes from the job, we will put together a plan for the most effective marketing strategy to get the best results.
+          | &#x9;&#x9;&#x9;&#x9;
+          .clearfix
+    // our
+    // employs
+    .employs
+      .container
+        .team
+          .product-tabs
+            // Horizontal Tab
+            #horizontalTab.r-tabs
+              ul.r-tabs-nav
+                li.r-tabs-tab.r-tabs-state-default
+                  a.r-tabs-anchor(href='#tab-1')  Employeers
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9; 
+                li.r-tabs-tab.r-tabs-state-default
+                  a.r-tabs-anchor(href='#tab-2') Job Seekers  
+              | &#x9;&#x9;&#x9;&#x9;&#x9;
+              .r-tabs-accordion-title.r-tabs-state-default
+                a.r-tabs-anchor(href='#tab-1')
+              #tab-2.product-complete-info.r-tabs-panel.r-tabs-state-default(style='overflow: hidden; display: none;')
+                .team-top
+                  li
+                    img.img-responsive(src='images/1.png', alt='')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  li
+                    img.img-responsive(src='images/2.png', alt='')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  li
+                    img.img-responsive(src='images/3.png', alt='')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  li
+                    img.img-responsive(src='images/4.png', alt='')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  li
+                    img.img-responsive(src='images/5.png', alt='')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  li
+                    img.img-responsive(src='images/6.png', alt='')
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              .r-tabs-accordion-title.r-tabs-state-active
+                a.r-tabs-anchor(href='#tab-2')
+              #tab-1.product-complete-info.r-tabs-panel.r-tabs-state-active(style='overflow: hidden; display: block;')
+                .team-top
+                  li
+                    img.img-responsive(src='images/t1.jpg', alt='')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  li
+                    img.img-responsive(src='images/t2.jpg', alt='')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  li
+                    img.img-responsive(src='images/t4.jpg', alt='')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  li
+                    img.img-responsive(src='images/t3.jpg', alt='')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  li
+                    img.img-responsive(src='images/t5.jpg', alt='')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  li
+                    img.img-responsive(src='images/t6.jpg', alt='')
+              // Responsive Tabs JS
+              script(src='js/jquery.responsiveTabs.js', type='text/javascript')
+              | &#x9;&#x9;&#x9;&#x9;
+              | &#x9;&#x9;&#x9;&#x9;    
+              script(type='text/javascript').
+                $(document).ready(function () {
+                $('#horizontalTab').responsiveTabs({
+                rotate: false,
+                startCollapsed: 'accordion',
+                collapsible: 'accordion',
+                setHash: true,
+                disabled: [4,5],
+                activate: function(e, tab) {
+                $('.info').html('Tab <strong>' + tab.id + '</strong> activated!');
+                }
+                });
+                $('#start-rotation').on('click', function() {
+                $('#horizontalTab').responsiveTabs('active');
+                });
+                $('#stop-rotation').on('click', function() {
+                $('#horizontalTab').responsiveTabs('stopRotation');
+                });
+                $('#start-rotation').on('click', function() {
+                $('#horizontalTab').responsiveTabs('active');
+                });
+                $('.select-tab').on('click', function() {
+                $('#horizontalTab').responsiveTabs('activate', $(this).val());
+                });
+                });
+    // employs
+    // recnt
+    .recnt
+      .container
+        h6 Recent jobs
+        | &#x9;&#x9;&#x9;
+        h3 Available jobs for you
+        | &#x9;&#x9;
+        .col-md-9.rec-left
+          .air
+            li.ic-on
+              i.drib
+            | &#x9;&#x9;&#x9;&#x9;
+            li.wb-dis
+              h4 Web Designer
+              h5 Full Time
+            | &#x9;&#x9;&#x9;&#x9;
+            li.dr-co
+              p dribble comunity
+            | &#x9;&#x9;&#x9;&#x9;
+            li.sa-pn
+              p
+                i.bung  
+                | San Franciso, USA
+            | &#x9;&#x9;&#x9;&#x9;
+            li.dolla
+              p 14000$
+            | &#x9;&#x9;&#x9;&#x9;
+            li.b-tn
+              .apply_btn
+                form(action='#')
+                  input(type='submit', value='Apply Now')
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            .clearfix
+          | &#x9;&#x9;&#x9;
+          .air-1
+            li.ic-on
+              i.cli
+            | &#x9;&#x9;&#x9;&#x9;
+            li.wb-dis
+              h4 Front End Developer
+              h5 Full Time
+            | &#x9;&#x9;&#x9;&#x9;
+            li.dr-co
+              p Jolil Corporation
+            | &#x9;&#x9;&#x9;&#x9;
+            li.sa-pn
+              p
+                i.bung  
+                | San Franciso, USA
+            | &#x9;&#x9;&#x9;&#x9;
+            li.dolla
+              p 14000$
+            | &#x9;&#x9;&#x9;&#x9;
+            li.b-tn
+              .apply_btn
+                form(action='#')
+                  input(type='submit', value='Apply Now')
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            .clearfix
+          | &#x9;&#x9;&#x9;
+          .air
+            li.ic-on
+              i.facb
+            | &#x9;&#x9;&#x9;&#x9;
+            li.wb-dis
+              h4 HR Manager
+              h5 Full Time
+            | &#x9;&#x9;&#x9;&#x9;
+            li.dr-co
+              p Fanta Bevarage
+            | &#x9;&#x9;&#x9;&#x9;
+            li.sa-pn
+              p
+                i.bung  
+                | Cupertino, CA. USA
+            | &#x9;&#x9;&#x9;&#x9;
+            li.dolla
+              p 14000$
+            | &#x9;&#x9;&#x9;&#x9;
+            li.b-tn
+              .apply_btn
+                form(action='#')
+                  input(type='submit', value='Apply Now')
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            .clearfix
+          | &#x9;&#x9;&#x9;
+          .air-1
+            li.ic-on
+              i.intre
+            | &#x9;&#x9;&#x9;&#x9;
+            li.wb-dis
+              h4 Internship Designer
+              h5 Part Time
+            | &#x9;&#x9;&#x9;&#x9;
+            li.dr-co
+              p Beatus Audio
+            | &#x9;&#x9;&#x9;&#x9;
+            li.sa-pn
+              p
+                i.bung  
+                | San Franciso, USA
+            | &#x9;&#x9;&#x9;&#x9;
+            li.dolla
+              p 14000$
+            | &#x9;&#x9;&#x9;&#x9;
+            li.b-tn
+              .apply_btn
+                form(action='#')
+                  input(type='submit', value='Apply Now')
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            .clearfix
+          | &#x9;&#x9;&#x9;
+          .air
+            li.ic-on
+              i.wind
+            | &#x9;&#x9;&#x9;&#x9;
+            li.wb-dis
+              h4 Sowtware Engineer
+              h5 Full Time
+            | &#x9;&#x9;&#x9;&#x9;
+            li.dr-co
+              p Microsoft 
+            | &#x9;&#x9;&#x9;&#x9;
+            li.sa-pn
+              p
+                i.bung  
+                | Cupertino, CA. USA
+            | &#x9;&#x9;&#x9;&#x9;
+            li.dolla
+              p 14000$
+            | &#x9;&#x9;&#x9;&#x9;
+            li.b-tn
+              .apply_btn
+                form(action='#')
+                  input(type='submit', value='Apply Now')
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            .clearfix
+        | &#x9;&#x9;
+        .col-md-3.recent-right
+          .recent-right-info
+            h3 Seeking a job?
+            | &#x9;&#x9;&#x9;&#x9;
+            .cre_btn
+              form(action='register.html')
+                input(type='submit', value='Create a Account')
+        | &#x9;&#x9;
+        .clearfix
+    // recnt
+    // what
+    .what
+      .container
+        h6 TESTIMONIALS
+        | &#x9;&#x9;&#x9;&#x9;
+        h3 WHAT PEOPLES ARE SAYING
+        | &#x9;&#x9;&#x9;
+        section.slider
+          .flexslider
+            ul.slides
+              li
+                .what-top
+                  p
+                    | Jobify offer an amazing service and I couldn&rsquo;t be happier! They are dedicated to helping recruiters find great candidates, wonderful service!
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  h5
+                    | Eftakher Alam,
+                    span  Product Designer
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  .what-bottom
+                    img.img-responsive(src='images/man.png', alt='')
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                .what-top
+                  p
+                    | Jobify offer an amazing service and I couldn&rsquo;t be happier! They are dedicated to helping recruiters find great candidates, wonderful service!
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  h5
+                    | Eftakher Alam,
+                    span  Product Designer
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  .what-bottom
+                    img.img-responsive(src='images/man.png', alt='')
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                .what-top
+                  p
+                    | Jobify offer an amazing service and I couldn&rsquo;t be happier! They are dedicated to helping recruiters find great candidates, wonderful service!
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  h5
+                    | Eftakher Alam,
+                    span  Product Designer
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  .what-bottom
+                    img.img-responsive(src='images/man.png', alt='')
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              li
+                .what-top
+                  p
+                    | Jobify offer an amazing service and I couldn&rsquo;t be happier! They are dedicated to helping recruiters find great candidates, wonderful service!
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  h5
+                    | Eftakher Alam,
+                    span  Product Designer
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  .what-bottom
+                    img.img-responsive(src='images/man.png', alt='')
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              .clearfix  
+        // FlexSlider
+        script(defer='', src='js/jquery.flexslider.js')
+        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;  
+        script(type='text/javascript').
+          $(function(){
+          SyntaxHighlighter.all();
+          });
+          $(window).load(function(){
+          $('.flexslider').flexslider({
+          animation: "slide",
+          start: function(slider){
+          $('body').removeClass('loading');
+          }
+          });
+          });
+        // FlexSlider
+    // what
+    // footer-top
+    .footer-top
+      .container
+        .col-md-4.foo-left
+          a(href='index.html')
+            img.img-responsive(src='images/logo.png', alt='')
+          | &#x9;&#x9;&#x9;
+          p
+            | Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. sed diam nonumy eirmod tempor invidunt ut labore. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.
+        | &#x9;&#x9;
+        .col-md-4.foo-left
+          h3 Twitter Update
+          | &#x9;&#x9;&#x9;
+          h6 ABOUT 9 HOURS
+          | &#x9;&#x9;&#x9;
+          p
+            | AGOMeet Aldous - a Brave New World for #rails with more cohesion, less coupling and greater dev speed http://t.co/rsekglotzs
+          | &#x9;&#x9;&#x9;
+          h6 ABOUT 1 DAY AGO
+          | &#x9;&#x9;&#x9;
+          p
+            | Here&apos;s a rare Interview with #graphicdesign legend Massimo Vignelli http://t.co/duxnpoh57z http://t.co/kxO3gPBTo7
+        | &#x9;&#x9;
+        .col-md-4.foo-left
+          h3 Useful lnks
+          | &#x9;&#x9;&#x9;&#x9;
+          ul
+            li.active
+              a(href='about.html') About Us
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href='#') Services 
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href='#') Work 
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href='blog.html') Our Blog
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href=' 404.html') Customers Testimonials
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href='#') Affliate
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href=' contact.html') Contact Us
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            .clearfix  
+        | &#x9;&#x9;
+        .clearfix  
+    // footer-top
+    // footer-bottom
+    .footer-bottom
+      .container
+        p
+          | Copyrights &copy; 2015 Muster All rights reserved | Template by 
+          a(href='http://w3layouts.com/') &nbsp; W3layouts
+    // footer-bottom

@@ -1,0 +1,98 @@
+extends layout
+
+block content
+  .header
+    .header-bottom
+      .container
+        .logo
+          a(href='/home')
+            h1.img-responsive Blog
+        | &#x9;&#x9;&#x9;&#x9;&#x9;
+        .head-nav
+          span.menu
+          | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+          ul.cl-effect-3
+            li
+              a(href='/') Home
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href=' ') About us
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href=' /posts') Blog
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            li
+              a(href='') Contact
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            .clearfix
+          // script-for-nav
+          script.
+            $( "span.menu" ).click(function() {
+              $( ".head-nav ul" ).slideToggle(300, function() {
+                // Animation complete.
+              });
+            });
+          // script-for-nav
+        | &#x9;&#x9;&#x9;&#x9;&#x9;
+        .header-right1
+          li
+            a(href='/signin') Sign In
+          | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+          li
+            a(href='/signup') Sign Up
+        | &#x9;&#x9;&#x9;&#x9;&#x9;
+        .clearfix
+  // header
+  // login
+  .login-page
+    .container
+      .account_grid
+        .col-md-6.login-left.wow.fadeInLeft(data-wow-delay='0.4s')
+          h3 NEW CUSTOMERS
+          | &#x9;&#x9;&#x9;&#x9;&#x9;
+          p
+            | By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.
+          | &#x9;&#x9;&#x9;&#x9;&#x9;
+          a.acount-btn(href='register.html') Create an Account
+        | &#x9;&#x9;&#x9;
+        .col-md-6.login-right.wow.fadeInRight(data-wow-delay='0.4s')
+          h3 REGISTERED CUSTOMERS
+          | &#x9;&#x9;&#x9;&#x9;&#x9;
+          p If you have an account with us, please log in.
+          | &#x9;&#x9;&#x9;&#x9;&#x9;
+          form(action='/login', method='POST')
+            div
+              span
+                | Login
+                label *
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              input(type='text', name='username', placeholder='Login', required='', autofocus='')
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            div
+              span
+                | Password
+                label *
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              input(type='password', name='password', placeholder='Password', required='')
+            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            input(type='submit', value='Sign In')
+            .auth
+              a.btn.btn-facebook(href='auth/facebook')
+                i.fa.fa-facebook.social-icons   Facebook
+              a.btn.btn-twitter(href='auth/twitter')
+                i.fa.fa-twitter.social-icons   Twitter
+              a.btn.btn-vk(href='auth/vkontakte')
+                i.fa.fa-vk.social-icons   VK
+
+        | &#x9;
+        | &#x9;&#x9;&#x9;&#x9;
+        .clearfix
+          #message
+            h1.text-center.error-message #{message}
+  // login
+  // footer-bottom
+  .footer-bottom
+    .container
+      p
+        | Copyrights &copy; 2015
+  // footer-bottom

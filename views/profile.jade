@@ -1,0 +1,77 @@
+extends layout
+
+block content
+  .header
+    .header-bottom
+      .container
+        .logo
+          a(href='/home')
+            h1.img-responsive Blog
+        .head-nav
+          span.menu
+          ul.cl-effect-3
+            li
+              a(href='/home') Home
+            li
+              a(href='/posts') Blog
+            li
+              a(href='/contact') Contact
+            .clearfix
+          // script-for-nav
+          script.
+            $("span.menu").click(function () {
+              $(".head-nav ul").slideToggle(300, function () {
+                // Animation complete.
+              });
+            });
+          // script-for-nav
+        .header-right1
+          li
+            a(href='') #{user.username}
+          li
+            a(href='/signout') Sign Out
+        .clearfix
+  // header
+  .mission
+    .container
+      .panel.panel-info
+        .panel-heading
+          h3.panel-title User Profile
+        .panel-body
+          .row
+            .col-md-3.col-lg-3(align='center')
+              - if(typeof user.avatar === "undefined"){
+              img.img-circle.img-responsive(alt='User Pic', width="200px", height="200px", src='https://assets.jobcase.com/assets/profile_placeholder-b5ae7217a753a1c2bb02f0a56b5efc5a177dff58fed331cafde2dcdad24ba6d3.png')
+              - } else {
+              img.img-circle.img-responsive(alt='User Pic', src='#{user.avatar}')
+              - }
+            .col-md-9.col-lg-9
+              table.table.table-user-information
+                tbody
+                  tr
+                    td First Name:
+                    td #{user.firstName}
+                  tr
+                    td Last Name:
+                    td #{user.lastName}
+                  tr
+                    td Shortly about:
+                    td #{user.shortly}
+                  tr
+                    td Interests:
+                    td #{user.interests}
+                  tr
+                    td email
+                    td #{user.email}
+        .panel-footer
+          a.btn.btn-sm.btn-primary(href='/addPost', data-original-title='Add Post', data-toggle='tooltip', type='button')
+            i.fa.fa-plus
+          span.pull-right
+            a.btn.btn-sm.btn-warning(href='/edit-profile', data-original-title='Edit this user', data-toggle='tooltip', type='button')
+              i.fa.fa-pencil-square-o
+  // footer-bottom
+  .footer-bottom
+    .container
+      p
+        | Copyrights © 2015 All rights reserved | Template by
+  // footer-bottom
