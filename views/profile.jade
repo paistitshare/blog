@@ -5,8 +5,7 @@ block content
     .header-bottom
       .container
         .logo
-          a(href='/home')
-            h1.img-responsive Blog
+          h1.img-responsive Blog
         .head-nav
           span.menu
           ul.cl-effect-3
@@ -17,34 +16,34 @@ block content
             li
               a(href='/contact') Contact
             .clearfix
-          // script-for-nav
           script.
             $("span.menu").click(function () {
               $(".head-nav ul").slideToggle(300, function () {
-                // Animation complete.
               });
             });
-          // script-for-nav
         .header-right1
-          li
-            a(href='') #{user.username}
-          li
-            a(href='/signout') Sign Out
+            - if(user) {
+            li
+                a(href='/profile/#{user.username}') #{user.username}
+            li
+                a(href='/signout') Sign Out
+            - } else {
+            li
+                a(href='/signin') Sign In
+            li
+                a(href='/signup') Sign Up
+            - }
         .clearfix
   // header
   .mission
     .container
       .panel.panel-info
         .panel-heading
-          h3.panel-title User Profile
+          h4.panel-title User Profile
         .panel-body
           .row
             .col-md-3.col-lg-3(align='center')
-              - if(typeof user.avatar === "undefined"){
-              img.img-circle.img-responsive(alt='User Pic', width="200px", height="200px", src='https://assets.jobcase.com/assets/profile_placeholder-b5ae7217a753a1c2bb02f0a56b5efc5a177dff58fed331cafde2dcdad24ba6d3.png')
-              - } else {
               img.img-circle.img-responsive(alt='User Pic', src='#{user.avatar}')
-              - }
             .col-md-9.col-lg-9
               table.table.table-user-information
                 tbody
@@ -64,14 +63,85 @@ block content
                     td email
                     td #{user.email}
         .panel-footer
-          a.btn.btn-sm.btn-primary(href='/addPost', data-original-title='Add Post', data-toggle='tooltip', type='button')
+          a.btn.btn-sm.btn-primary#templates-toggle(type='button')
             i.fa.fa-plus
           span.pull-right
-            a.btn.btn-sm.btn-warning(href='/edit-profile', data-original-title='Edit this user', data-toggle='tooltip', type='button')
+            a.btn.btn-sm.btn-warning(href='/edit-settings' type='button')
               i.fa.fa-pencil-square-o
-  // footer-bottom
+      .recnt#templates(style="display: none;")
+          .container
+              h3 Publication templates
+              .col-md-3
+              .col-md-6
+                  .air
+                      li.ic-on
+                          i.drib
+                      li.wb-dis
+                          h4 Image
+                      li.dr-co
+                          h4 Text
+                      li.sa-pn
+                          p
+                              i.bung
+                              |&nbsp
+                      li.b-tn
+                          .apply_btn
+                              form(action='/template_image_text')
+                                  input(type='submit', value='Choose Template')
+                      .clearfix
+                  | &#x9;&#x9;&#x9;
+                  .air-1
+                      li.ic-on
+                          i.cli
+                      li.wb-dis
+                          h4 Video
+                      li.dr-co
+                          h4 Text
+                      li.sa-pn
+                          p
+                              i.bung
+                              |&nbsp
+                      li.b-tn
+                          .apply_btn
+                              form(action='#')
+                                  input(type='submit', value='Choose Template')
+                      .clearfix
+                  .air
+                      li.ic-on
+                          i.facb
+                      li.wb-dis
+                          h4 Text
+                      li.dr-co
+                          h4 Google Map
+                      li.sa-pn
+                          p
+                              i.bung
+                              |&nbsp
+                      li.b-tn
+                          .apply_btn
+                              form(action='#')
+                                  input(type='submit', value='Choose Template')
+                      .clearfix
+                  .air-1
+                      li.ic-on
+                          i.intre
+                      li.wb-dis
+                          h4 Image
+                      li.dr-co
+                          h4 Text
+                      li.sa-pn
+                          h4 Video
+                      li.b-tn
+                          .apply_btn
+                              form(action='#')
+                                  input(type='submit', value='Choose Template')
+                      .clearfix
+              .col-md-3
+              .clearfix
+    // footer-bottom
   .footer-bottom
     .container
       p
-        | Copyrights © 2015 All rights reserved | Template by
-  // footer-bottom
+        | Copyrights © 2015
+      block scripts
+          script(src="/js/profile.js")

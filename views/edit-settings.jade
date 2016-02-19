@@ -1,0 +1,112 @@
+extends layout
+
+block content
+    body
+        .header
+            .header-bottom
+                .container
+                    .logo
+                        h2.img-responsive Blog
+                    .head-nav
+                        span.menu
+                        ul.cl-effect-3
+                            li
+                                a(href='index.html') Home
+                            li
+                                a(href=' about.html') About us
+                            li
+                                a(href=' blog.html') Blog
+                            li.active
+                                a(href=' contact.html') Contact
+                            .clearfix
+                        script.
+                            $("span.menu").click(function () {
+                                $(".head-nav ul").slideToggle(300, function () {
+                                    // Animation complete.
+                                });
+                            });
+                    .header-right1
+                        - if(user) {
+                        li
+                            a(href='/profile/#{user.username}') #{user.username}
+                        li
+                            a(href='/signout') Sign Out
+                        - } else {
+                        li
+                            a(href='/signin') Sign In
+                        li
+                            a(href='/signup') Sign Up
+                        - }
+                    .clearfix
+        .contact_top
+            .container(ng-app='settingsApp', ng-controller='SettingsCtrl')
+                .col-md-8.contact_left()
+                    h4 Profile Settings
+                    p
+                    form
+                        .form_details
+                            input.text(type='text', ng-model='info.firstName', value='{{info.firstName}}', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'First Name';}")
+                            input.text(type='text', ng-model='info.lastName', value='{{info.lastName}}', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Last Name';}")
+                            input.text(type='text', name='email', ng-model='info.email', value='{{info.email}}', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Email Address';}")
+                            label Choose language:
+                            select.form-control(ng-model='info.language', name='language')
+                                - if(user.theme === 'Light') {
+                                option(value='English') English
+                                option(value='Russian') Russian
+                                - } else {
+                                option(value='English') English
+                                option(value='Russian') Russian
+                                - }
+                            label Choose color theme:
+                            select.form-control(ng-model='info.theme', name='theme')
+                                - if(user.theme === 'Light') {
+                                option(value='Light' selected) Light
+                                option(value='Dark') Dark
+                                - } else {
+                                option(value='Light') Light
+                                option(value='Dark' selected) Dark
+                                - }
+                            textarea(ng-model='info.shortly', name='shortly', value='{{info.shortly}}', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Shortly about';}") Shortly about
+                            textarea(ng-model='info.interests', name='interests', value='{{info.interests}}', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Interests';}") Interests
+                            .clearfix
+                            #message
+                                h1.text-center.error-message {{ message }}
+                            .sub-button
+                                input(type='submit', value='Save', ng-click='saveSettings()')
+                .col-md-4.contact_right
+                    - if (user.images && user.images.length)
+                    h4 Current avatar
+                    img(ng-src='{{info.avatar}}', alt='', width='200px', height='200px')
+                    h4 Drop file to upload new avatar
+                    #refresh.preview
+                    form(enctype='multipart/form-data')
+                        span.btn.btn-default.btn-file
+                            !=cloudinary.uploader.image_upload_tag('image')
+        .footer-bottom
+            .container
+                p
+                    | Copyrights &copy; 2015
+block scripts
+    script(src='/angular/angular.min.js')
+    script(src='/js/controllers/settingsController.js')
+    script(src='/js/jquery.ui.widget.js')
+    script(src='/js/jquery.iframe-transport.js')
+    script(src='/js/jquery.fileupload.js')
+    script(src='/js/jquery.cloudinary.js')
+    script(type='text/javascript').
+        $.cloudinary.config({api_key: '!{api_key}', cloud_name: '!{cloud_name}'});
+        $('.cloudinary-fileupload').bind('fileuploadstart', function (e) {
+        $('.preview').html('Upload started...');
+        });
+        $('.cloudinary-fileupload').bind('cloudinarydone', function (e, data) {
+        $('.preview').html(
+        $.cloudinary.image(data.result.public_id, {
+        format: data.result.format,
+        version: data.result.version,
+        crop: 'scale',
+        width: 200,
+        height: 200
+        })
+        );
+        return true;
+        });

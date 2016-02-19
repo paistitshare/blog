@@ -946,6 +946,7 @@ ul#slider4 {
 }
 .header-right1 li {
   display: inline-block;
+  margin-right: 10px;
 }
 .header-right1 li a {
   text-decoration: none;
@@ -1048,12 +1049,19 @@ top: 0px;
   padding: 0;
   font-weight: 400;
 }
-.mission h3 {
+.mission h4 {
   color: #42E4d8;
   text-transform: uppercase;
-  font-weight: 400;
-  padding: 1.3em 0 0 0;
+  font-weight: 300;
+  padding: 10px 0 0 10px;
   font-size: 2.3em;
+  text-align: center;
+}
+.recnt h4 {
+  color: #202020;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 1.5em;
   text-align: center;
 }
 .mission-grids {
@@ -1685,7 +1693,7 @@ i.adm1{
 .contact_left p span:hover{
 	text-decoration:underline;
 }
-.form_details input[type="text"], .form_details textarea, .form_details select, .form_details label{
+.form_details input[type="text"], .form_details textarea{
 	padding: 11px;
 	width: 51%;
 	font-size: 1em;
@@ -1702,7 +1710,18 @@ i.adm1{
 	-o-border-radius: 0.3em;
 	-moz-border-radius: 0.3em;
 }
+.form_details label {
+    padding: 5px;
+    width: 51%;
+}
+.form_details select{
+    padding: 15px;
+    width: 51%;
+    font-size: 1em;
+    margin: 5px 0px;
+}
 .form_details textarea {
+    margin-top: 10px;
 	height:200px;
 	resize:none;
 	width:80%;
@@ -1760,6 +1779,42 @@ text-align: left;
   font-style: italic;
   margin-bottom: 19px;
   width: 84%;
+}
+.contact_left label {
+  font-size: 1em;
+  color: #4E9ECA;
+  font-weight: 600;
+  line-height: 1.8em;
+}
+.contact_right {
+  text-align: center;
+}
+.contact_right img {
+  margin-bottom: 15px;
+}
+.contact_right input[type="file"]{
+  padding: 11px;
+  width: 51%;
+  font-size: 1em;
+  margin: 10px 0px;
+  border:1px solid #bbb;
+  color: #bbb;
+  background: none;
+  -webkit-appearance: none;
+  float: left;
+  outline: none;
+  font-weight:400;
+  border-radius: 0.3em;
+  -webkit-border-radius: 0.3em;
+  -o-border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
+}
+.contact_right h4{
+  font-size: 1em;
+  padding-bottom: 10px;
+  color: #42E4d8;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 .main-head-section h3{
   font-size: 2.2em;
@@ -3368,4 +3423,23 @@ a.b-home {
 .btn-vk { background: #0e76a8; border-radius: 0; color: #fff }
 .btn-vk:link, .btn-vk:visited { color: #fff }
 .btn-vk:active, .btn-vk:hover { background: #0b6087; color: #fff }
-.header-right1 { }
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  width: 200px;
+  height: 100px;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 200px !important;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}

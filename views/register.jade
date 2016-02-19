@@ -5,169 +5,77 @@ block content
         .header-bottom
             .container
                 .logo
-                    a(href='index.html')
-                        img.img-responsive(src='images/logo.png', alt='')
-                | &#x9;&#x9;&#x9;&#x9;&#x9;
+                    h2.img-responsive Blog
                 .head-nav
                     span.menu
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                     ul.cl-effect-3
                         li
                             a(href='/') Home
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                         li
                             a(href=' ') About us
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                         li
                             a(href=' /posts') Blog
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                         li
                             a(href=' ') Contact
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                         .clearfix
-                    // script-for-nav
                     script.
                         $( "span.menu" ).click(function() {
                             $( ".head-nav ul" ).slideToggle(300, function() {
-                                // Animation complete.
                             });
                         });
-                    // script-for-nav
-                | &#x9;&#x9;&#x9;&#x9;&#x9;
                 .header-right1
                     - if(user) {
                     li
-                        a(href='/profile') #{user.username}
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                        a(href='/profile/#{user.username}') #{user.username}
                     li
                         a(href='/signout') Sign Out
                     - } else {
                     li
                         a(href='/signin') Sign In
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                     li
                         a(href='/signup') Sign Up
                     - }
-                | &#x9;&#x9;&#x9;&#x9;&#x9;
                 .clearfix
-    // header
-    // registration
     .main-1
         .container
             .register
                 form(action='/signup', method='POST')
                     .register-top-grid
                         h3 PERSONAL INFORMATION
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;
                         .wow.fadeInLeft(data-wow-delay='0.4s')
                             span
                                 | Login
                                 label *
-                            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                             input(type='text', name='username', placeholder='Login', required='', autofocus='')
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;
                         .wow.fadeInRight(data-wow-delay='0.4s')
                             span
                                 | First Name
                                 label *
-                            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                             input(type='text', name='firstName', placeholder='Name', required='')
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;
                         .wow.fadeInLeft(data-wow-delay='0.4s')
                             span
                                 | Email Address
                                 label *
-                            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                             input(type='email', name='email', placeholder='e-mail', required='')
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;
                         .wow.fadeInRight(data-wow-delay='0.4s')
                             span
                                 | Last Name
                                 label *
-                            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                             input(type='text', name='lastName', placeholder='Last Name', required='')
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;
                         .clearfix
-                    | &#x9;&#x9;&#x9;&#x9;
                     .register-bottom-grid
                         .wow(data-wow-delay='0.4s')
                             span
                                 | Password
                                 label *
-                            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                             input(type='password', name='password', placeholder='Password', required='')
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-                        .wow(data-wow-delay='0.4s')
-                            span
-                                | Confirm Password
-                                label *
-                            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-                            input(type='password')
-                    | &#x9;&#x9;&#x9;&#x9;
                     .register-but
                         input(type='submit', value='Sign up')
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;
                         .clearfix
                             #message
                                 if message
                                     h1.text-center.error-message #{message}
-
-    // registration
-    // footer-top
-    .footer-top
-        .container
-            .col-md-4.foo-left
-                a(href='index.html')
-                    img.img-responsive(src='images/logo.png', alt='')
-                | &#x9;&#x9;&#x9;
-                p
-                    | Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. sed diam nonumy eirmod tempor invidunt ut labore. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.
-            | &#x9;&#x9;
-            .col-md-4.foo-left
-                h3 Twitter Update
-                | &#x9;&#x9;&#x9;
-                h6 ABOUT 9 HOURS
-                | &#x9;&#x9;&#x9;
-                p
-                    | AGOMeet Aldous - a Brave New World for #rails with more cohesion, less coupling and greater dev speed http://t.co/rsekglotzs
-                | &#x9;&#x9;&#x9;
-                h6 ABOUT 1 DAY AGO
-                | &#x9;&#x9;&#x9;
-                p
-                    | Here&apos;s a rare Interview with #graphicdesign legend Massimo Vignelli http://t.co/duxnpoh57z http://t.co/kxO3gPBTo7
-            | &#x9;&#x9;
-            .col-md-4.foo-left
-                h3 Useful lnks
-                | &#x9;&#x9;&#x9;&#x9;
-                ul
-                    li.active
-                        a(href='about.html') About Us
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;
-                    li
-                        a(href='#') Services
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;
-                    li
-                        a(href='#') Work
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;
-                    li
-                        a(href='blog.html') Our Blog
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;
-                    li
-                        a(href=' 404.html') Customers Testimonials
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;
-                    li
-                        a(href='#') Affliate
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;
-                    li
-                        a(href=' contact.html') Contact Us
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-                    .clearfix
-            | &#x9;&#x9;
-            .clearfix
-    // footer-top
-    // footer-bottom
     .footer-bottom
         .container
             p
-                | Copyrights &copy; 2015 Muster All rights reserved | Template by
-                a(href='http://w3layouts.com/') &nbsp; W3layouts
+                | Copyrights &copy; 2015

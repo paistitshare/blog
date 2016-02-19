@@ -14,16 +14,13 @@ block content
           ul.cl-effect-3
             li
               a(href='/') Home
-            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
             li
               a(href=' ') About us
-            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
             li
               a(href=' /posts') Blog
-            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
             li
-              a(href='') Contact
-            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              a(href=' ') Contact
+            .clearfix
             .clearfix
           // script-for-nav
           script.
@@ -35,12 +32,17 @@ block content
           // script-for-nav
         | &#x9;&#x9;&#x9;&#x9;&#x9;
         .header-right1
+          - if(user) {
+          li
+            a(href='/profile/#{user.username}') #{user.username}
+          li
+            a(href='/signout') Sign Out
+          - } else {
           li
             a(href='/signin') Sign In
-          | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
           li
             a(href='/signup') Sign Up
-        | &#x9;&#x9;&#x9;&#x9;&#x9;
+          - }
         .clearfix
   // header
   // login

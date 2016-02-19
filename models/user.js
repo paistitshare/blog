@@ -6,7 +6,7 @@ var User = sequelize.define('User', {
     type: Sequelize.STRING,
     unique: true,
     validate: {
-      is: /^[a-z0-9\_\-]+$/i,
+      is: /^[a-z0-9\_\-]+$/i
     }
   },
   email: {
@@ -16,13 +16,13 @@ var User = sequelize.define('User', {
     }
   },
   firstName: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   lastName: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   password: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   shortly: {
     type: Sequelize.STRING,
@@ -32,19 +32,31 @@ var User = sequelize.define('User', {
     type: Sequelize.STRING,
     defaultValue: ''
   },
-  facebookid        : Sequelize.STRING,
-  facebooktoken     : Sequelize.STRING,
-  facebookemail     : Sequelize.STRING,
-  facebookname      : Sequelize.STRING,
-  twitterid        : Sequelize.STRING,
-  twittertoken         : Sequelize.STRING,
-  twittername          : Sequelize.STRING,
-  vkontakteid        : Sequelize.STRING,
-  vkontaktetoken         : Sequelize.STRING,
-  vkontakteemail         : Sequelize.STRING,
-  vkontaktename          : Sequelize.STRING,
+  language: {
+    type: Sequelize.STRING,
+    defaultValue: 'English'
+  },
+  theme: {
+    type: Sequelize.STRING,
+    defaultValue: 'Light'
+  },
+  avatar: {
+    type: Sequelize.STRING,
+    defaultValue: 'http://bit.ly/1Uawe8m'
+  },
+  facebookid: Sequelize.STRING,
+  facebooktoken: Sequelize.STRING,
+  facebookemail: Sequelize.STRING,
+  facebookname: Sequelize.STRING,
+  twitterid: Sequelize.STRING,
+  twittertoken: Sequelize.STRING,
+  twittername: Sequelize.STRING,
+  vkontakteid: Sequelize.STRING,
+  vkontaktetoken: Sequelize.STRING,
+  vkontakteemail: Sequelize.STRING,
+  vkontaktename: Sequelize.STRING,
 },{
   freezeTableName: true
 });
 
-module.exports = User
+module.exports = User;

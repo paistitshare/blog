@@ -7,107 +7,44 @@ block content
           .logo
             a(href='index.html')
               img.img-responsive(src='images/logo.png', alt='')
-          | &#x9;&#x9;&#x9;&#x9;&#x9;
           .head-nav
-            span.menu  
-            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+            span.menu
             ul.cl-effect-3
               li
-                a(href='/') Home
-              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                a(href='index.html') Home
               li
                 a(href=' about.html') About us
-              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
               li
-                a(href=' /posts') Blog
-              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-              li
-                a(href=' ') Contact
-              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-              .clearfix  
-            // script-for-nav
+                a(href=' blog.html') Blog
+              li.active
+                a(href=' contact.html') Contact
+              .clearfix
             script.
               $( "span.menu" ).click(function() {
               $( ".head-nav ul" ).slideToggle(300, function() {
               // Animation complete.
               });
               });
-            // script-for-nav
-          | &#x9;&#x9;&#x9;&#x9;&#x9;
           .header-right1
+            - if(user) {
             li
-              a(href='login.html') Login
-            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              a(href='/profile/#{user.username}') #{user.username}
             li
-              a(href='register.html') Sign In
-          | &#x9;&#x9;&#x9;&#x9;&#x9;
-          .clearfix  
-    // header
-    // 404
+              a(href='/signout') Sign Out
+            - } else {
+            li
+              a(href='/signin') Sign In
+            li
+              a(href='/signup') Sign Up
+            - }
+          .clearfix
     .main
       .error-404.text-center
         h1 404
-        | &#x9;&#x9;&#x9;&#x9;
         p not found
-        | &#x9;&#x9;&#x9;&#x9;
         a.b-home(href='index.html') Back to Home
-    // 404
-    // footer-top
-    .footer-top
-      .container
-        .col-md-4.foo-left
-          a(href='/')
-            img.img-responsive(src='images/logo.png', alt='')
-          | &#x9;&#x9;&#x9;
-          p
-            | Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. sed diam nonumy eirmod tempor invidunt ut labore. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.
-        | &#x9;&#x9;
-        .col-md-4.foo-left
-          h3 Twitter Update
-          | &#x9;&#x9;&#x9;
-          h6 ABOUT 9 HOURS
-          | &#x9;&#x9;&#x9;
-          p
-            | AGOMeet Aldous - a Brave New World for #rails with more cohesion, less coupling and greater dev speed http://t.co/rsekglotzs
-          | &#x9;&#x9;&#x9;
-          h6 ABOUT 1 DAY AGO
-          | &#x9;&#x9;&#x9;
-          p
-            | Here&apos;s a rare Interview with #graphicdesign legend Massimo Vignelli http://t.co/duxnpoh57z http://t.co/kxO3gPBTo7
-        | &#x9;&#x9;
-        .col-md-4.foo-left
-          h3 Useful lnks
-          | &#x9;&#x9;&#x9;&#x9;
-          ul
-            li.active
-              a(href='about.html') About Us
-            | &#x9;&#x9;&#x9;&#x9;&#x9;
-            li
-              a(href='#') Services 
-            | &#x9;&#x9;&#x9;&#x9;&#x9;
-            li
-              a(href='#') Work 
-            | &#x9;&#x9;&#x9;&#x9;&#x9;
-            li
-              a(href='blog.html') Our Blog
-            | &#x9;&#x9;&#x9;&#x9;&#x9;
-            li
-              a(href=' 404.html') Customers Testimonials
-            | &#x9;&#x9;&#x9;&#x9;&#x9;
-            li
-              a(href='#') Affliate
-            | &#x9;&#x9;&#x9;&#x9;&#x9;
-            li
-              a(href=' contact.html') Contact Us
-            | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-            .clearfix  
-        | &#x9;&#x9;
-        .clearfix  
-    // footer-top
-    // footer-bottom
     .footer-bottom
       .container
         p
           | Copyrights &copy; 2015 Muster All rights reserved | Template by 
           a(href='http://w3layouts.com/') &nbsp; W3layouts
-    // footer-bottom

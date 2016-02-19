@@ -34,21 +34,17 @@ block content
                     // script-for-nav
                 | &#x9;&#x9;&#x9;&#x9;&#x9;
                 .header-right1
-                    #user
                     - if(user) {
                     li
-                        a(href='/profile') #{user.username}
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                        a(href='/profile/#{user.username}') #{user.username}
                     li
                         a(href='/signout') Sign Out
                     - } else {
                     li
                         a(href='/signin') Sign In
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                     li
                         a(href='/signup') Sign Up
                     - }
-                | &#x9;&#x9;&#x9;&#x9;&#x9;
                 .clearfix
     // header
     .our
@@ -90,126 +86,7 @@ block content
                 | &#x9;&#x9;&#x9;&#x9;
                 .clearfix
     // recnt
-    .recnt
-        .container
-            h6 Post templates
-            | &#x9;&#x9;&#x9;
-            h3 Available templates
-            | &#x9;&#x9;
-            .col-md-9.rec-left
-                .air
-                    li.ic-on
-                        i.drib
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.wb-dis
-                        h4 Image
-                        h5 Text
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.dr-co
-                        p dribble comunity
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.sa-pn
-                        p
-                            i.bung
-                            | San Franciso, USA
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.dolla
-                        p 14000$
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.b-tn
-                        .apply_btn
-                            form(action='#')
-                                input(type='submit', value='Create')
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-                    .clearfix
-                | &#x9;&#x9;&#x9;
-                .air-1
-                    li.ic-on
-                        i.cli
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.wb-dis
-                        h4 Video
-                        h5 Text
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.dr-co
-                        p Jolil Corporation
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.sa-pn
-                        p
-                            i.bung
-                            | San Franciso, USA
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.dolla
-                        p 14000$
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.b-tn
-                        .apply_btn
-                            form(action='#')
-                                input(type='submit', value='Create')
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-                    .clearfix
-                | &#x9;&#x9;&#x9;
-                .air
-                    li.ic-on
-                        i.facb
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.wb-dis
-                        h4 Text
-                        h5 Google Map
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.dr-co
-                        p Fanta Bevarage
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.sa-pn
-                        p
-                            i.bung
-                            | Cupertino, CA. USA
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.dolla
-                        p 14000$
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.b-tn
-                        .apply_btn
-                            form(action='#')
-                                input(type='submit', value='Create')
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-                    .clearfix
-                | &#x9;&#x9;&#x9;
-                .air-1
-                    li.ic-on
-                        i.intre
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.wb-dis
-                        h4 Image Video
-                        h5 Text Google Map
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.dr-co
-                        p Beatus Audio
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.sa-pn
-                        p
-                            i.bung
-                            | San Franciso, USA
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.dolla
-                        p 14000$
-                    | &#x9;&#x9;&#x9;&#x9;
-                    li.b-tn
-                        .apply_btn
-                            form(action='#')
-                                input(type='submit', value='Create')
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-                    .clearfix
-                | &#x9;&#x9;&#x9;
-            | &#x9;&#x9;
-            .col-md-3.recent-right
-                .recent-right-info
-                    h3 Seeking a job?
-                    | &#x9;&#x9;&#x9;&#x9;
-                    .cre_btn
-                        input(type='submit', value='Create a Account' id="findone")
-            | &#x9;&#x9;
-            .clearfix
+
     // footer-bottom
     .footer-bottom
         .container
