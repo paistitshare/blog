@@ -5,22 +5,18 @@ block content
         .header-bottom
             .container
                 .logo
-                    h1.img-responsive Blog
+                    a.img-responsive(href='/')
+                        h1 ItrBlog
                 .head-nav
                     span.menu
                     ul.cl-effect-3
+                        li.active
+                            a(href='/') Home
                         li
-                            a(href='/home') Home
+                            a(href='/search') Search
                         li
-                            a(href='/posts') Blog
-                        li
-                            a(href='/contact') Contact
+                            a(href='/posts') Publications
                         .clearfix
-                    script.
-                        $("span.menu").click(function () {
-                            $(".head-nav ul").slideToggle(300, function () {
-                            });
-                        });
                 .header-right1
                     li
                         a(href='/signin') Sign In

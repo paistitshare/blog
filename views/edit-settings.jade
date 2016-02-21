@@ -6,25 +6,18 @@ block content
             .header-bottom
                 .container
                     .logo
-                        h2.img-responsive Blog
+                        a.img-responsive(href='/')
+                            h1 ItrBlog
                     .head-nav
                         span.menu
                         ul.cl-effect-3
-                            li
-                                a(href='index.html') Home
-                            li
-                                a(href=' about.html') About us
-                            li
-                                a(href=' blog.html') Blog
                             li.active
-                                a(href=' contact.html') Contact
+                                a(href='/') Home
+                            li
+                                a(href='/search') Search
+                            li
+                                a(href='/posts') Publications
                             .clearfix
-                        script.
-                            $("span.menu").click(function () {
-                                $(".head-nav ul").slideToggle(300, function () {
-                                    // Animation complete.
-                                });
-                            });
                     .header-right1
                         - if(user) {
                         li
@@ -76,7 +69,7 @@ block content
                 .col-md-4.contact_right
                     - if (user.images && user.images.length)
                     h4 Current avatar
-                    img(ng-src='{{info.avatar}}', alt='', width='200px', height='200px')
+                    img(src='{{info.avatar}}', alt='', width='200px', height='200px')
                     h4 Drop file to upload new avatar
                     #refresh.preview
                     form(enctype='multipart/form-data')
@@ -109,4 +102,8 @@ block scripts
         })
         );
         return true;
+        });
+        $("span.menu").click(function () {
+        $(".head-nav ul").slideToggle(300, function () {
+        });
         });

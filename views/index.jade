@@ -5,24 +5,17 @@ block content
         .header-bottom
             .container
                 .logo
-                    h1.img-responsive Blog
-                | &#x9;&#x9;&#x9;&#x9;&#x9;
+                    a.img-responsive(href='/')
+                        h1 ItrBlog
                 .head-nav
                     span.menu
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                     ul.cl-effect-3
                         li.active
                             a(href='/') Home
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
                         li
-                            a(href=' ') About us
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                            a(href='/search') Search
                         li
-                            a(href=' /posts') Blog
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-                        li
-                            a(href=' ') Contact
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                            a(href='/posts') Publications
                         .clearfix
                     // script-for-nav
                     script.
@@ -47,49 +40,59 @@ block content
                     - }
                 .clearfix
     // header
-    .our
-        .container
-            h5 our process
-            | &#x9;&#x9;&#x9;
-            h2 How We Work for you?
-            | &#x9;&#x9;&#x9;
-            p
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-            | &#x9;&#x9;&#x9;
-            .our-top
-                .col-md-4.our-left
-                    i.best
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;
-                    h3 Searching for the best job
-                    | &#x9;
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;
-                    p
-                        | Using the outcomes from the job, we will put together a plan for the most effective marketing strategy to get the best results.
-                | &#x9;&#x9;&#x9;&#x9;
-                .col-md-4.our-left
-                    i.resu
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;
-                    h3 Searching for the best job
-                    | &#x9;
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;
-                    p
-                        | Using the outcomes from the job, we will put together a plan for the most effective marketing strategy to get the best results.
-                | &#x9;&#x9;&#x9;&#x9;
-                .col-md-4.our-left
-                    i.interv
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;
-                    h3 Searching for the best job
-                    | &#x9;
-                    | &#x9;&#x9;&#x9;&#x9;&#x9;
-                    p
-                        | Using the outcomes from the job, we will put together a plan for the most effective marketing strategy to get the best results.
-                | &#x9;&#x9;&#x9;&#x9;
+    .main
+        .our
+            .container
+                h5 our process
+                | &#x9;&#x9;&#x9;
+                h2 How We Work for you?
+                | &#x9;&#x9;&#x9;
+                p
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                | &#x9;&#x9;&#x9;
+                .our-top
+                    .col-md-4.our-left
+                        i.best
+                        | &#x9;&#x9;&#x9;&#x9;&#x9;
+                        h3 Searching for the best job
+                        | &#x9;
+                        | &#x9;&#x9;&#x9;&#x9;&#x9;
+                        p
+                            | Using the outcomes from the job, we will put together a plan for the most effective marketing strategy to get the best results.
+                    | &#x9;&#x9;&#x9;&#x9;
+                    .col-md-4.our-left
+                        i.resu
+                        | &#x9;&#x9;&#x9;&#x9;&#x9;
+                        h3 Searching for the best job
+                        | &#x9;
+                        | &#x9;&#x9;&#x9;&#x9;&#x9;
+                        p
+                            | Using the outcomes from the job, we will put together a plan for the most effective marketing strategy to get the best results.
+                    | &#x9;&#x9;&#x9;&#x9;
+                    .col-md-4.our-left
+                        i.interv
+                        | &#x9;&#x9;&#x9;&#x9;&#x9;
+                        h3 Searching for the best job
+                        | &#x9;
+                        | &#x9;&#x9;&#x9;&#x9;&#x9;
+                        p
+                            | Using the outcomes from the job, we will put together a plan for the most effective marketing strategy to get the best results.
+                    | &#x9;&#x9;&#x9;&#x9;
+                    .clearfix
+        .recnt
+            .container
+                h3 Tag Cloud
+                .col-md-3
+                .col-md-6(ng-app="tagCloudApp", ng-controller="tagCloudController")
+                    jqcloud.jqcloud(words="words", width='500', height='300', colors='{{colors}}', delay='10', steps='7', font-size='{from:0.09, to:0.04}')
+                .col-md-3
                 .clearfix
-    // recnt
-
-    // footer-bottom
     .footer-bottom
         .container
             p
                 | Copyrights &copy; 2015
-    // footer-bottom
+block scripts
+    script(src='/jqcloud2/dist/jqcloud.min.js')
+    script(src='/angular/angular.min.js')
+    script(src='/js/angular-jqcloud.js')
+    script(src='/js/controllers/indexController.js')

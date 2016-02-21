@@ -5,19 +5,17 @@ block content
         .header-bottom
             .container
                 .logo
-                    a(href='index.html')
-                        img.img-responsive(src='images/logo.png', alt='')
+                    a.img-responsive(href='/')
+                        h1 ItrBlog
                 .head-nav
                     span.menu
                     ul.cl-effect-3
-                        li
-                            a(href='index.html') Home
-                        li
-                            a(href=' about.html') About us
-                        li
-                            a(href=' blog.html') Blog
                         li.active
-                            a(href=' contact.html') Contact
+                            a(href='/') Home
+                        li
+                            a(href='/search') Search
+                        li
+                            a(href='/posts') Publications
                         .clearfix
                     script.
                         $( "span.menu" ).click(function() {
@@ -47,5 +45,4 @@ block content
     .footer-bottom
         .container
             p
-                | Copyrights &copy; 2015 Muster All rights reserved | Template by
-                a(href='http://w3layouts.com/') &nbsp; W3layouts
+                | Copyrights &copy; 2015

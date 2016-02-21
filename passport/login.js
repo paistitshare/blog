@@ -65,13 +65,13 @@ module.exports = function (passport) {
                             }
                         } else {
                             // if there is no user, create them
-                            var newUser = User.build({
+                            User.build({
+                                username: profile.id,
                                 facebookid: profile.id,
                                 facebooktoken: token,
                                 facebookname: profile.name.givenName + ' ' + profile.name.familyName,
                                 facebookemail: profile.emails[0].value
-                            });
-                            newUser.save()
+                            }).save()
                                 .then(function (user) {
                                     done(null, user);
                                 })
@@ -83,7 +83,6 @@ module.exports = function (passport) {
             } else {
                 // user already exists and is logged in, we have to link accounts
                 var user = req.user; // pull the user out of the session
-
                 user.facebookid = profile.id;
                 user.facebooktoken = token;
                 user.facebookname = profile.name.givenName + ' ' + profile.name.familyName;
@@ -108,7 +107,6 @@ module.exports = function (passport) {
         function (req, token, refreshToken, profile, done) {
             // check if the user is already logged in
             if (!req.user) {
-
                 User.findOne({where: {'twitterid': profile.id}})
                     .then(function (user) {
                         if (user) {
@@ -129,12 +127,12 @@ module.exports = function (passport) {
                             }
                         } else {
                             // if there is no user, create them
-                            var newUser = User.build({
+                            User.build({
+                                username: profile.id,
                                 twitterid: profile.id,
                                 twittertoken: token,
                                 twittername: profile.username
-                            });
-                            newUser.save()
+                            }).save()
                                 .then(function (user) {
                                     done(null, user);
                                 })
@@ -192,13 +190,13 @@ module.exports = function (passport) {
                             }
                         } else {
                             // if there is no user, create them
-                            var newUser = User.build({
+                            User.build({
+                                username: profile.id,
                                 vkontakteid: profile.id,
                                 vkontaktetoken: token,
                                 vkontaktename: profile.name.givenName + ' ' + profile.name.familyName,
                                 vkontakteemail: profile.email
-                            });
-                            newUser.save()
+                            }).save()
                                 .then(function (user) {
                                     done(null, user);
                                 })
@@ -224,5 +222,4 @@ module.exports = function (passport) {
                     });
             }
         }));
-
 };

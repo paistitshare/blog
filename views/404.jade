@@ -2,49 +2,46 @@ extends layout
 
 block content
     .header
-      .header-bottom
-        .container
-          .logo
-            a(href='index.html')
-              img.img-responsive(src='images/logo.png', alt='')
-          .head-nav
-            span.menu
-            ul.cl-effect-3
-              li
-                a(href='index.html') Home
-              li
-                a(href=' about.html') About us
-              li
-                a(href=' blog.html') Blog
-              li.active
-                a(href=' contact.html') Contact
-              .clearfix
-            script.
-              $( "span.menu" ).click(function() {
-              $( ".head-nav ul" ).slideToggle(300, function() {
-              // Animation complete.
-              });
-              });
-          .header-right1
-            - if(user) {
-            li
-              a(href='/profile/#{user.username}') #{user.username}
-            li
-              a(href='/signout') Sign Out
-            - } else {
-            li
-              a(href='/signin') Sign In
-            li
-              a(href='/signup') Sign Up
-            - }
-          .clearfix
+        .header-bottom
+            .container
+                .logo
+                    a.img-responsive(href='/')
+                        h1 ItrBlog
+                .head-nav
+                    span.menu
+                    ul.cl-effect-3
+                        li.active
+                            a(href='/') Home
+                        li
+                            a(href='/search') Search
+                        li
+                            a(href='/posts') Publications
+                        .clearfix
+                .header-right1
+                    - if(user) {
+                    li
+                        a(href='/profile/#{user.username}') #{user.username}
+                    li
+                        a(href='/signout') Sign Out
+                    - } else {
+                    li
+                        a(href='/signin') Sign In
+                    li
+                        a(href='/signup') Sign Up
+                    - }
+                .clearfix
     .main
-      .error-404.text-center
-        h1 404
-        p not found
-        a.b-home(href='index.html') Back to Home
+        .error-404.text-center
+            h1 404
+            p not found
+            a.b-home(href='index.html') Back to Home
     .footer-bottom
-      .container
-        p
-          | Copyrights &copy; 2015 Muster All rights reserved | Template by 
-          a(href='http://w3layouts.com/') &nbsp; W3layouts
+        .container
+            p
+                | Copyrights &copy; 2015
+block scripts
+    script.
+        $("span.menu").click(function () {
+            $(".head-nav ul").slideToggle(300, function () {
+            });
+        });

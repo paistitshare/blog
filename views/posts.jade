@@ -1,53 +1,132 @@
 extends layout
 
 block content
-    nav.navbar.navbar-inverse.navbar-fixed-top
-        .container
-            .navbar-header
-                a.navbar-brand(href='#') Drawing App
-            #navbar.navbar-collapse.collapse.navbar-right
-                ul.nav.navbar-nav
-                    li.active
-                        a(href='#') #{user.username}
+    .header
+        .header-bottom
+            .container
+                .logo
+                    a.img-responsive(href='/')
+                        h1 ItrBlog
+                .head-nav
+                    span.menu
+                    ul.cl-effect-3
+                        li.active
+                            a(href='/') Home
+                        li
+                            a(href='/search') Search
+                        li
+                            a(href='/posts') Publications
+                        .clearfix
+                    script.
+                        $("span.menu").click(function () {
+                            $(".head-nav ul").slideToggle(300, function () {
+                            });
+                        });
+                .header-right1
+                    - if(user) {
+                    li
+                        a(href='/profile/#{user.username}') #{user.username}
                     li
                         a(href='/signout') Sign Out
-    .container
-        #main.row
-            #images.col-md-4
-                h4 Upload File
-                form(action="/upload", method="post", enctype="multipart/form-data")
-                    span.btn.btn-default.btn-file
-                        input.file(type="file", name="image")
-                        input.btn.btn-primary(type="submit", value="Upload Image")
-
-                h4 Drop file to upload
-
-                .preview#refresh
-
-            .col-md-8
-                .workspace.text-center(ng-app='pw.canvas-painter', ng-controller='CanvasController as ctrl')
-                    div(pw-canvas='', version='ctrl.version', options="{undo: true, width: 800, height: 600, color: selectedColor, lineWidth: selectedLineWidth, customCanvasId: 'myCanvas'}")
-                    div(pw-color-selector="['#33cc33', '#ffcc00', 'red', '#3366ff', '#ff3300', '#999966', '#00ffcc', '#000']", color='selectedColor')
-                    .range.well
-                        input.lineWidthSelector(type='range', min='1', max='50', ng-model='selectedLineWidth')
-                    {{selectedLineWidth}}
-    .buttons
-        button.btn.btn-warning(ng-click='ctrl.undo()', ng-disabled='ctrl.version < 1') Cancel (Version {{ctrl.version}})
-        button.btn.btn-info(ng-click='ctrl.clear()') Clear
-        a.btn.btn-primary#downloadImgLink(onclick="$('#downloadImgLink').attr('href', document.getElementById('myCanvas').toDataURL());", download='MyImage.png', href='#', target='_blank') Download As Image
-        button.btn.btn-success#save(style="display: none;" ng-click='ctrl.save()') Save to database
-
-.clearfix
-
+                    - } else {
+                    li
+                        a(href='/signin') Sign In
+                    li
+                        a(href='/signup') Sign Up
+                    - }
+                .clearfix
+    .blog(ng-app='postsApp')
+        .container
+            .blog-content(ng-controller='PostsCtrl')
+                .blog-content-left
+                    .blog-articals
+                        .blog-artical(ng-repeat='post in posts track by $index')
+                            .blog-artical-basicinfo
+                                ul
+                                    li.post-date
+                                        p
+                                            span(ng-model='post.updatedAt')
+                                            label May,2015
+                                    .clearfix
+                            .blog-artical-info
+                                .blog-artical-info-head
+                                    h2
+                                        a(href='', ng-model='post.title')
+                                    ul
+                                        li
+                                            i.adm1
+                                            | by
+                                            a(href='/prodile/{{post.UserId}}', ng-model='post.UserId')
+                                        li
+                                            span
+                                            a(href='#') Lorem
+                                            | ,
+                                            a(href='#') Ipsum
+                                            | ,
+                                            a(href='#') printer
+                                            | ,
+                                            a(href='#') unknown
+                                        .clearfix
+                                .blog-artical-info-text
+                                    p(ng-model='post.content')
+                                        a(href='/post/{{post.id}}') [...]
+                            .clearfix
+                    // start-blog-pagenate
+                    .blog-pagenat
+                        ul
+                            li
+                                a.frist(href='#')
+                                    span
+                            li
+                                a(href='#') 1
+                            li
+                                a(href='#') 2
+                            li
+                                a(href='#') 3
+                            li
+                                a(href='#') 4
+                            li
+                                a.last(href='#')
+                                    span
+                            .clearfix
+                    // //End-blog-pagenate
+                .blog-content-right
+                    .b-search
+                        form
+                            input(type='text', value='Search', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Search';}")
+                            input(type='submit', value='')
+                    // start-twitter-weight
+                    .b-tag-weight
+                        h3 Tags Weight
+                        ul
+                            li
+                                a(href='#') Lorem
+                            li
+                                a(href='#') consectetur
+                            li
+                                a(href='#') dolore
+                            li
+                                a(href='#') aliqua
+                            li
+                                a(href='#') sit amet
+                            li
+                                a(href='#') ipsum
+                            li
+                                a(href='#') Lorem
+                            li
+                                a(href='#') consectetur
+                            li
+                                a(href='#') dolore
+                            li
+                                a(href='#') aliqua
+                            li
+                                a(href='#') sit amet
+                            li
+                                a(href='#') ipsum
+                .clearfix
+    .footer-bottom
+        .container
+            p Copyrights © 2015
 block scripts
-    script(type='text/javascript').
-        $.cloudinary.config({ api_key: '!{api_key}', cloud_name: '!{cloud_name}' });
-        $('.cloudinary-fileupload').bind('fileuploadstart', function(e){
-            $('.preview').html('Upload started...');
-        });
-        $('.cloudinary-fileupload').bind('cloudinarydone', function(e, data){
-            $('.preview').html(
-                    $.cloudinary.image(data.result.public_id, { format: data.result.format, version: data.result.version, crop: 'scale', width: 100, height: 100 })
-            );
-            return true;
-        });
+    script(src='/angular/angular.min.js')
+    scrpt(src='/js/controllers/postsController.js')

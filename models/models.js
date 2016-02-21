@@ -1,22 +1,29 @@
-// app/model/models.js
-var User = require('./user.js')
-var Post = require('./post.js')
-var Comment = require('./comment.js')
-var Tag = require('./tag.js')
-var sequelize = require('../config/connect.js')
+var User = require('./user.js');
+var Post = require('./post.js');
+var Comment = require('./comment.js');
+var Tag = require('./tag.js');
+var Rate = require('./rate.js');
+var Like = require('./like.js')
+var sequelize = require('../config/connect.js');
 var bCrypt = require('bcrypt-nodejs');
 
-User.hasMany(Post, {foreignkey: 'post_pk'});
-Post.belongsTo(User, {foreignKey: 'post_pk'});
+User.hasMany(Post);
+Post.belongsTo(User);
 
-User.hasMany(Comment, {foreignkey: 'comment_pk'});
-Comment.belongsTo(User, {foreignKey: 'comment_pk'});
+User.hasMany(Comment);
+Comment.belongsTo(User);
 
-Post.hasMany(Comment, {foreignkey: 'post_comment_pk'});
-Comment.belongsTo(Post, {foreignKey: 'post_comment_pk'});
+Post.hasMany(Comment);
+Comment.belongsTo(Post);
 
-Post.belongsToMany(Tag, {through: 'post_has_tags', foreignKey: 'post_tag_post_id'});
-Tag.belongsToMany(Post, {through: 'post_has_tags', foreignKey: 'tags_identifier'});
+Post.hasOne(Rate);
+Rate.belongsTo(Post);
+
+Comment.hasMany(Like);
+Like.belongsTo(Comment);
+
+Post.hasMany(Tag);
+Tag.belongsTo(Post);
 
 sequelize.sync().then(function(){
 	var createHash = function(password){
@@ -25,14 +32,14 @@ sequelize.sync().then(function(){
 	User.create({
    	username: 'admin',
    	password: createHash('admin')
-  });
+  }).then(function(result){}).catch(function(err){});
   console.log('Sequelize successfully synced');
 })
 .catch(function(err) {
 	console.log(err);
 });
 
-module.exports.User = User
-module.exports.Post = Post
-module.exports.Comment = Comment
-module.exports.Tag = Tag
+module.exports.User = User;
+module.exports.Post = Post;
+module.exports.Comment = Comment;
+module.exports.Tag = Tag;

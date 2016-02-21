@@ -1,147 +1,231 @@
 extends layout
 
 block content
-  .header
-    .header-bottom
-      .container
-        .logo
-          h1.img-responsive Blog
-        .head-nav
-          span.menu
-          ul.cl-effect-3
-            li
-              a(href='/home') Home
-            li
-              a(href='/posts') Blog
-            li
-              a(href='/contact') Contact
-            .clearfix
-          script.
-            $("span.menu").click(function () {
-              $(".head-nav ul").slideToggle(300, function () {
-              });
-            });
-        .header-right1
-            - if(user) {
-            li
-                a(href='/profile/#{user.username}') #{user.username}
-            li
-                a(href='/signout') Sign Out
-            - } else {
-            li
-                a(href='/signin') Sign In
-            li
-                a(href='/signup') Sign Up
-            - }
-        .clearfix
-  // header
-  .mission
-    .container
-      .panel.panel-info
-        .panel-heading
-          h4.panel-title User Profile
-        .panel-body
-          .row
-            .col-md-3.col-lg-3(align='center')
-              img.img-circle.img-responsive(alt='User Pic', src='#{user.avatar}')
-            .col-md-9.col-lg-9
-              table.table.table-user-information
-                tbody
-                  tr
-                    td First Name:
-                    td #{user.firstName}
-                  tr
-                    td Last Name:
-                    td #{user.lastName}
-                  tr
-                    td Shortly about:
-                    td #{user.shortly}
-                  tr
-                    td Interests:
-                    td #{user.interests}
-                  tr
-                    td email
-                    td #{user.email}
-        .panel-footer
-          a.btn.btn-sm.btn-primary#templates-toggle(type='button')
-            i.fa.fa-plus
-          span.pull-right
-            a.btn.btn-sm.btn-warning(href='/edit-settings' type='button')
-              i.fa.fa-pencil-square-o
-      .recnt#templates(style="display: none;")
-          .container
-              h3 Publication templates
-              .col-md-3
-              .col-md-6
-                  .air
-                      li.ic-on
-                          i.drib
-                      li.wb-dis
-                          h4 Image
-                      li.dr-co
-                          h4 Text
-                      li.sa-pn
-                          p
-                              i.bung
-                              |&nbsp
-                      li.b-tn
-                          .apply_btn
-                              form(action='/template_image_text')
-                                  input(type='submit', value='Choose Template')
-                      .clearfix
-                  | &#x9;&#x9;&#x9;
-                  .air-1
-                      li.ic-on
-                          i.cli
-                      li.wb-dis
-                          h4 Video
-                      li.dr-co
-                          h4 Text
-                      li.sa-pn
-                          p
-                              i.bung
-                              |&nbsp
-                      li.b-tn
-                          .apply_btn
-                              form(action='#')
-                                  input(type='submit', value='Choose Template')
-                      .clearfix
-                  .air
-                      li.ic-on
-                          i.facb
-                      li.wb-dis
-                          h4 Text
-                      li.dr-co
-                          h4 Google Map
-                      li.sa-pn
-                          p
-                              i.bung
-                              |&nbsp
-                      li.b-tn
-                          .apply_btn
-                              form(action='#')
-                                  input(type='submit', value='Choose Template')
-                      .clearfix
-                  .air-1
-                      li.ic-on
-                          i.intre
-                      li.wb-dis
-                          h4 Image
-                      li.dr-co
-                          h4 Text
-                      li.sa-pn
-                          h4 Video
-                      li.b-tn
-                          .apply_btn
-                              form(action='#')
-                                  input(type='submit', value='Choose Template')
-                      .clearfix
-              .col-md-3
-              .clearfix
-    // footer-bottom
-  .footer-bottom
-    .container
-      p
-        | Copyrights © 2015
-      block scripts
-          script(src="/js/profile.js")
+    .header
+        .header-bottom
+            .container
+                .logo
+                    a.img-responsive(href='/')
+                        h1 ItrBlog
+                .head-nav
+                    span.menu
+                        ul.cl-effect-3
+                            li.active
+                                a(href='/') Home
+                            li
+                                a(href='/search') Search
+                            li
+                                a(href='/posts') Publications
+                            .clearfix
+                .header-right1
+                    - if(user) {
+                    li
+                        a(href='/profile/#{user.username}') #{user.username}
+                    li
+                        a(href='/signout') Sign Out
+                    - } else {
+                    li
+                        a(href='/signin') Sign In
+                    li
+                        a(href='/signup') Sign Up
+                    - }
+                .clearfix
+    .main
+        .mission
+            .container
+                .panel.panel-info
+                    .panel-heading
+                        h4.panel-title User Profile
+                    .panel-body
+                        .row
+                            .col-md-3.col-lg-3(align='center')
+                                img.img-circle.img-responsive(alt='User Pic', src='#{user.avatar}')
+                            .col-md-9.col-lg-9
+                                table.table.table-user-information
+                                    tbody
+                                        tr
+                                            td First Name:
+                                            td #{user.firstName}
+                                        tr
+                                            td Last Name:
+                                            td #{user.lastName}
+                                        tr
+                                            td Shortly about:
+                                            td #{user.shortly}
+                                        tr
+                                            td Interests:
+                                            td #{user.interests}
+                                        tr
+                                            td email
+                                            td #{user.email}
+                    .panel-footer
+                        a.btn.btn-sm.btn-primary#templates-toggle(type='button')
+                            i.fa.fa-plus
+                        span.pull-right
+                            a.btn.btn-sm.btn-warning(href='/edit-settings' type='button')
+                                i.fa.fa-pencil-square-o
+                .recnt#templates(style="display: none;")
+                    .container
+                        h3 Publication templates
+                        .col-md-3
+                        .col-md-6
+                            .air
+                                li.ic-on
+                                    i.drib
+                                li.wb-dis
+                                    h4 Image
+                                li.dr-co
+                                    h4 Text
+                                li.sa-pn
+                                    p
+                                        i.bung
+                                        | &nbsp
+                                li.b-tn
+                                    .apply_btn
+                                        form(action='/create_image_text', method='GET')
+                                            input(type='submit', value='Choose Template')
+                                .clearfix
+                            | &#x9;&#x9;&#x9;
+                            .air-1
+                                li.ic-on
+                                    i.cli
+                                li.wb-dis
+                                    h4 Video
+                                li.dr-co
+                                    h4 Text
+                                li.sa-pn
+                                    p
+                                        i.bung
+                                        | &nbsp
+                                li.b-tn
+                                    .apply_btn
+                                        form(action='#')
+                                            input(type='submit', value='Choose Template')
+                                .clearfix
+                            .air
+                                li.ic-on
+                                    i.facb
+                                li.wb-dis
+                                    h4 Text
+                                li.dr-co
+                                    h4 Google Map
+                                li.sa-pn
+                                    p
+                                        i.bung
+                                        | &nbsp
+                                li.b-tn
+                                    .apply_btn
+                                        form(action='#')
+                                            input(type='submit', value='Choose Template')
+                                .clearfix
+                            .air-1
+                                li.ic-on
+                                    i.intre
+                                li.wb-dis
+                                    h4 Image
+                                li.dr-co
+                                    h4 Text
+                                li.sa-pn
+                                    h4 Video
+                                li.b-tn
+                                    .apply_btn
+                                        form(action='#')
+                                            input(type='submit', value='Choose Template')
+                                .clearfix
+                        .col-md-3
+                        .clearfix
+    .blog(ng-app='postsApp')
+        .container
+            .blog-content(ng-controller='PostsCtrl')
+                .blog-content-left
+                    .blog-articals
+                        .blog-artical(ng-repeat='post in posts track by $index')
+                            .blog-artical-basicinfo
+                                ul
+                                    li.post-date
+                                        p
+                                            span(ng-model='post.updatedAt')
+                                            label May,2015
+                                    .clearfix
+                            .blog-artical-info
+                                .blog-artical-info-head
+                                    h2
+                                        a(href='', ng-model='post.title')
+                                    ul
+                                        li
+                                            i.adm1
+                                            | by
+                                            a(href='/prodile/{{post.UserId}}', ng-model='post.UserId')
+                                        li
+                                            span
+                                            a(href='#') Lorem
+                                            | ,
+                                            a(href='#') Ipsum
+                                            | ,
+                                            a(href='#') printer
+                                            | ,
+                                            a(href='#') unknown
+                                        .clearfix
+                                .blog-artical-info-text
+                                    p(ng-model='post.content')
+                                        a(href='/post/{{post.id}}') [...]
+                            .clearfix
+                    // start-blog-pagenate
+                    .blog-pagenat
+                        ul
+                            li
+                                a.frist(href='#')
+                                    span
+                            li
+                                a(href='#') 1
+                            li
+                                a(href='#') 2
+                            li
+                                a(href='#') 3
+                            li
+                                a(href='#') 4
+                            li
+                                a.last(href='#')
+                                    span
+                            .clearfix
+                    // //End-blog-pagenate
+                .blog-content-right
+                    .b-search
+                        form
+                            input(type='text', value='Search', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Search';}")
+                            input(type='submit', value='')
+                    // start-twitter-weight
+                    .b-tag-weight
+                        h3 Tags Weight
+                        ul
+                            li
+                                a(href='#') Lorem
+                            li
+                                a(href='#') consectetur
+                            li
+                                a(href='#') dolore
+                            li
+                                a(href='#') aliqua
+                            li
+                                a(href='#') sit amet
+                            li
+                                a(href='#') ipsum
+                            li
+                                a(href='#') Lorem
+                            li
+                                a(href='#') consectetur
+                            li
+                                a(href='#') dolore
+                            li
+                                a(href='#') aliqua
+                            li
+                                a(href='#') sit amet
+                            li
+                                a(href='#') ipsum
+                .clearfix
+    .footer-bottom
+        .container
+            p
+                | Copyrights © 2015
+            block scripts
+                script(src="/js/profile.js")

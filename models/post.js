@@ -1,18 +1,23 @@
-var Sequelize = require('sequelize')
-var sequelize = require('../config/connect.js')
+var Sequelize = require('sequelize');
+var sequelize = require('../config/connect.js');
 
 var Post = sequelize.define('Post', {
-  post_id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true
-    },
   title: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: false
+  },
+  description: {
+    type: Sequelize.STRING
+  },
+  image: {
+    type: Sequelize.STRING
+  },
+  video: {
+    type: Sequelize.STRING
   },
   content: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT
   }
 });
 
-module.exports = Post
+module.exports = Post;
