@@ -31,9 +31,14 @@ sequelize.sync().then(function(){
 	};
 	User.create({
    	username: 'admin',
-   	password: createHash('admin')
+   	password: createHash('admin'),
+	firstName: 'Ivan',
+	lastName: 'Ivanov',
+	shortly: 'Simple Man',
+	interests: 'Programming',
+	email: 'admin@itblog.com'
   }).then(function(result){}).catch(function(err){});
-  console.log('Sequelize successfully synced');
+  	console.log('Sequelize successfully synced');
 })
 .catch(function(err) {
 	console.log(err);

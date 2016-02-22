@@ -45,88 +45,34 @@ block content
                                 ul
                                     li.post-date
                                         p
-                                            span(ng-model='post.updatedAt')
-                                            label May,2015
+                                            span {{post.updatedAt | date: "dd"}}
+                                            label {{post.updatedAt | date: "MMM, yyyy"}}
                                     .clearfix
                             .blog-artical-info
                                 .blog-artical-info-head
                                     h2
-                                        a(href='', ng-model='post.title')
+                                        a(href='/post/{{post.id}}') {{post.title}}
                                     ul
                                         li
                                             i.adm1
                                             | by
-                                            a(href='/prodile/{{post.UserId}}', ng-model='post.UserId')
+                                            a(href='/profile/{{post.username}}') {{post.username}}
                                         li
                                             span
-                                            a(href='#') Lorem
-                                            | ,
-                                            a(href='#') Ipsum
-                                            | ,
-                                            a(href='#') printer
-                                            | ,
-                                            a(href='#') unknown
+                                            a(href='#', ng-repeat='tag in post.tags track by $index') {{tag.name}}
                                         .clearfix
                                 .blog-artical-info-text
-                                    p(ng-model='post.content')
+                                    p {{post.content}}
                                         a(href='/post/{{post.id}}') [...]
                             .clearfix
-                    // start-blog-pagenate
-                    .blog-pagenat
-                        ul
-                            li
-                                a.frist(href='#')
-                                    span
-                            li
-                                a(href='#') 1
-                            li
-                                a(href='#') 2
-                            li
-                                a(href='#') 3
-                            li
-                                a(href='#') 4
-                            li
-                                a.last(href='#')
-                                    span
-                            .clearfix
-                    // //End-blog-pagenate
                 .blog-content-right
                     .b-search
                         form
                             input(type='text', value='Search', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Search';}")
                             input(type='submit', value='')
-                    // start-twitter-weight
-                    .b-tag-weight
-                        h3 Tags Weight
-                        ul
-                            li
-                                a(href='#') Lorem
-                            li
-                                a(href='#') consectetur
-                            li
-                                a(href='#') dolore
-                            li
-                                a(href='#') aliqua
-                            li
-                                a(href='#') sit amet
-                            li
-                                a(href='#') ipsum
-                            li
-                                a(href='#') Lorem
-                            li
-                                a(href='#') consectetur
-                            li
-                                a(href='#') dolore
-                            li
-                                a(href='#') aliqua
-                            li
-                                a(href='#') sit amet
-                            li
-                                a(href='#') ipsum
-                .clearfix
     .footer-bottom
         .container
             p Copyrights © 2015
 block scripts
     script(src='/angular/angular.min.js')
-    scrpt(src='/js/controllers/postsController.js')
+    script(src='/js/controllers/postsController.js')

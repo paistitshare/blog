@@ -4078,3 +4078,31 @@ div.register-bottom-grid {
     font-weight: 600;
     text-decoration: none !important;
 }
+
+.edit-post {
+    padding-top: 5px;
+    background: none !important;
+}
+
+.edit-post a i {
+    color: #f0ad4e;
+}
+
+.delete-post {
+    padding-top: 4px;
+    background: none !important;
+}
+
+.delete-post a i {
+    color: #ff0000;
+}
+
+.blog-artical-info-text {
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.single h4{
+    font-wight: 600 !important;
+}

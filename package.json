@@ -10,6 +10,7 @@
   "author": "paistitshare",
   "license": "ISC",
   "dependencies": {
+    "angular-youtube-embed": "^1.1.1",
     "bcrypt-nodejs": "*",
     "body-parser": "~1.0.0",
     "cloudinary": "*",

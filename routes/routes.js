@@ -56,32 +56,17 @@ module.exports = function (passport) {
 
     router.get('/profile/:username', function (req, res, next) {
         User.findOne({where: {username: req.params.username}}).then(function(usr) {
-            //console.log("usr.username result is: " + usr.username);
-            if (req.params.username===req.user.username&&req.isAuthenticated()) {
-                Post.findAll({where: {UserId: req.user.id}}).then(function(posts){
-                    res.send(posts);
-                }).catch(function(err){
-                    if (err) throw err;
-                });
-                res.render('profile', {user: req.user});
+            if (req.isAuthenticated()) {
+                if(req.params.username===req.user.username||req.user.username==='admin') {
+                    res.render('profile', {user: req.user});
+                }
             }
             else res.render('view-profile', {info: usr});
         }).catch(function(error) {
             if(req.isAuthenticated()) res.render('404', {user: req.user});
             else res.render('404');
         });
-        //console.log('\n\nreq.user: ' + req.user + '\n\n');
-        //res.render('profile');
-        //res.render('profile', {user: req.user});
     });
-
-    //router.get('/profile/:username', function (req, res, next) {
-    //    User.findOne({where: req.params.username}).then(function(usr) {
-    //        res.render('view-profile', {info: usr});
-    //    }).catch(function(error) {
-    //        res.render('404');
-    //    });
-    //});
 
     router.get('/signin', function (req, res) {
         res.render('signin', {message: req.flash('message')});
@@ -105,12 +90,8 @@ module.exports = function (passport) {
     });
 
     router.get('/home', isAuthenticated, function (req, res) {
-        Tag.findAll().then(function(tags){
-            if(req.isAuthenticated()) res.render('index', {user: req.user, tags: tags});
-            res.render('index', {tags: tags});
-        }).catch(function (err){
-            if(err) throw err;
-        });
+            if(req.isAuthenticated()) res.render('index', {user: req.user});
+            res.render('index');
     });
 
     router.get('/edit-settings', isAuthenticated, function (req, res) {
@@ -132,16 +113,24 @@ module.exports = function (passport) {
         });
     });
 
-    router.get('/create_image_text', isAuthenticated, function(req, res) {
+    router.get('/create-image-text', isAuthenticated, function(req, res) {
         cloudinary.api.resources(function (items) {
-            res.render('create_image_text', {username: req.user.username, cloudinary: cloudinary});
+            res.render('create-image-text', {username: req.user.username, cloudinary: cloudinary});
         });
     });
 
-    router.post('/saveImageTextPost', function(req, res) {
-        console.log(req.body.image);
+    router.get('/create-video-text', isAuthenticated, function(req, res) {
+       res.render('create-video-text', {username: req.user.username});
+    });
+
+    router.get('/create-map-text', isAuthenticated, function(req, res) {
+        res.render('create-video-text', {username: req.user.username});
+    });
+
+    router.post('/createImageTextPost', function(req, res) {
         User.findOne({where: {username: req.body.username}}).then(function (user) {
             Post.create({
+                template: req.body.template,
                 title: req.body.title,
                 description: req.body.description,
                 content: req.body.content,
@@ -162,11 +151,50 @@ module.exports = function (passport) {
         });
     });
 
-    router.get('/getPublications', function(req,res) {
-        Post.findAll({where: {UserId: req.body.user_id}}).then(function(posts){
-            res.send(posts);
-        }).catch(function(err){
-            if (err) throw err;
+    router.post('/createVideoTextPost', function(req, res) {
+        User.findOne({where: {username: req.body.username}}).then(function (user) {
+            Post.create({
+                template: req.body.template,
+                title: req.body.title,
+                description: req.body.description,
+                content: req.body.content,
+                video: req.body.video,
+                UserId: user.id
+            }).then(function (post) {
+                post.setUser([user]);
+                var tagsBulk = req.body.tags.map(function (tag) {
+                    return {PostId: post.id, name: tag.text};
+                });
+                Tag.bulkCreate(tagsBulk).then(function (tags) {
+                    //tags.setPost(post);
+                    res.send('success');
+                });
+            }).catch(function (err) {
+                if (err) throw err;
+            });
+        });
+    });
+
+    router.post('/createMapTextPost', function(req, res) {
+        User.findOne({where: {username: req.body.username}}).then(function (user) {
+            Post.create({
+                template: req.body.template,
+                title: req.body.title,
+                description: req.body.description,
+                content: req.body.content,
+                map: req.body.map,
+                UserId: user.id
+            }).then(function (post) {
+                post.setUser([user]);
+                var tagsBulk = req.body.tags.map(function (tag) {
+                    return {PostId: post.id, name: tag.text};
+                });
+                Tag.bulkCreate(tagsBulk).then(function (tags) {
+                    res.send('success');
+                });
+            }).catch(function (err) {
+                if (err) throw err;
+            });
         });
     });
 
@@ -185,24 +213,99 @@ module.exports = function (passport) {
             //var posts = result.map(function (post) {
             //    return {id: post.id, title: post.title, description: post.description ,updatedAt: post.updatedAt, content: post.content, UserId: post.UserId};
             //});
-            if(req.isAuthenticated()) res.render('post',{post: post, user: req.user});
-            else res.render('post',{post: post});
+            console.log('post: ' + JSON.stringify(post));
+            switch(post.template){
+                case 'image-text': {
+                    if(req.isAuthenticated()) res.render('post-image-text',{post: post, user: req.user});
+                    else res.render('post-image-text',{post: post});
+                    break;
+                }
+                case 'video-text': {
+                    if(req.isAuthenticated()) res.render('post-video-text',{post: post, user: req.user});
+                    else res.render('post-video-text',{post: post});
+                    break;
+                }
+                case 'map-text': {
+                    if(req.isAuthenticated()) res.render('post-map-text',{post: post, user: req.user});
+                    else res.render('post-map-text',{post: post});
+                    break;
+                }
+                default: {
+                    res.render('404');
+                }
+            }
         }).catch(function(err){
             if (err) throw err;
         });
     });
 
     router.get('/getPosts', function (req, res){
-        Post.findAll().then(function(result){
+        Post.findAll({include: [User, Tag]}).then(function(result){
             var posts = result.map(function (post) {
-                return {id: post.id, title: post.title, description: post.description ,updatedAt: post.updatedAt, content: post.content, UserId: post.UserId};
+                var tags = post.Tags.map(function (tag) {
+                    return {name: tag.name};
+                });
+                return {id: post.id, title: post.title, description: post.description ,updatedAt: post.updatedAt, content: post.content, UserId: post.UserId, username: post.User.username, tags: tags};
             });
-            console.log(posts);
-            for(post in posts) {
-                console.log('post.id: ' + post.id + ' post.title: ' + post.title);
-            }
             res.send(JSON.stringify(posts));
         }).catch(function(err){
+            if (err) throw err;
+        });
+    });
+
+    router.get('/getPost/:postid', function (req, res){
+        Post.findOne({include: [User, Tag], where: {id: req.params.postid}}).then(function(result){
+            var post = result;
+                var tags = post.Tags.map(function (tag) {
+                    return {name: tag.name};
+                });
+            post.Tags = tags;
+                //return {id: post.id, title: post.title, description: post.description ,updatedAt: post.updatedAt, content: post.content, UserId: post.UserId, username: post.User.username, tags: tags};
+            res.send(JSON.stringify(post));
+        }).catch(function(err){
+            if (err) throw err;
+        });
+    });
+
+    router.post('/createComment', function(req, res){
+        User.findOne({where: {username: req.body.username}}).then(function (user) {
+            Comment.create({
+                UserId: user.id,
+                content: req.body.content,
+                PostId: req.body.PostId
+            }).then(function () {
+                res.send(200);
+            }).catch(function (err) {
+                if (err) throw err;
+            });
+        });
+    });
+
+    router.get('/getComments/:postid', function(req, res){
+        Comment.findAll({include: [User], where: {PostId: req.params.postid}}).then(function(result) {
+            var comments = result.map(function (comment) {
+                return {id: comment.id, content: comment.content ,updatedAt: comment.updatedAt, UserId: comment.UserId, username: comment.User.username, avatar: comment.User.avatar};
+            });
+            res.send(JSON.stringify(comments));
+        });
+    });
+
+    router.get('/getPublications/:username', function(req, res){
+        User.findOne({where: {username: req.params.username}}).then(function(usr) {
+            Post.findAll({include: [User, Tag], where: {UserId: usr.id}}).then(function(result){
+                console.log('/getPublications/:userid: '+ result);
+                var posts = result.map(function (post) {
+                    var tags = post.Tags.map(function (tag) {
+                        return {name: tag.name};
+                    });
+                    return {id: post.id, title: post.title, description: post.description ,updatedAt: post.updatedAt, content: post.content, UserId: post.UserId, username: post.User.username, tags: tags};
+                });
+                console.log('JSON.stringify(posts): ' + JSON.stringify(posts));
+                res.send(JSON.stringify(posts));
+            }).catch(function(err){
+                if (err) throw err;
+            });
+        }).catch(function (err) {
             if (err) throw err;
         });
     });

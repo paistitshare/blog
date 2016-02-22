@@ -33,10 +33,10 @@ block content
     .main
         .contact_top
             .container
-                .col-md-12.contact_left(ng-app='createImageTextApp', ng-controller='CreateImageTextCtrl')
+                .col-md-12.contact_left(ng-app='editImageTextApp', ng-controller='EditImageTextCtrl')
                     h4 Create Post
                     p
-                    form()
+                    form
                         .form_details
                             label Title:
                             input.text(type='text', ng-model='post.title', value='Title')
@@ -78,21 +78,21 @@ block scripts
     script(type='text/javascript').
         $.cloudinary.config({api_key: '!{api_key}', cloud_name: '!{cloud_name}'});
         $('.cloudinary-fileupload').bind('fileuploadstart', function (e) {
-            $('.preview').html('Upload started...');
+        $('.preview').html('Upload started...');
         });
         $('.cloudinary-fileupload').bind('cloudinarydone', function (e, data) {
-            $('.preview').html(
-                    $.cloudinary.image(data.result.public_id, {
-                        format: data.result.format,
-                        version: data.result.version,
-                        crop: 'scale',
-                        width: 200,
-                        height: 200
-                    })
-            );
-            return true;
+        $('.preview').html(
+        $.cloudinary.image(data.result.public_id, {
+        format: data.result.format,
+        version: data.result.version,
+        crop: 'scale',
+        width: 200,
+        height: 200
+        })
+        );
+        return true;
         });
         $("span.menu").click(function () {
-            $(".head-nav ul").slideToggle(300, function () {
-            });
+        $(".head-nav ul").slideToggle(300, function () {
+        });
         });

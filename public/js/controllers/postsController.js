@@ -1,10 +1,11 @@
 (function () {
     'use strict';
 
-    angular.module('postsApp').controller('PostsCtrl', function ($scope, $http, $window) {
-        $http.get('/getPosts').then(function(data){
-            alert(JSON.stringify(data));
+    var postsApp = angular.module('postsApp', []);
+    postsApp.controller('PostsCtrl', function ($scope, $http, $window) {
+        $http.get('/getPosts').then(function(posts){
             $scope.posts = posts.data;
+            if(Object.keys(posts.data).length == 0) $scope.message = 'No publications found';
         }, httpError);
 
         function httpError(error) {

@@ -1,0 +1,69 @@
+extends layout
+
+block content
+    .header
+        .header-bottom
+            .container
+                .logo
+                    a.img-responsive(href='/')
+                        h1 ItrBlog
+                .head-nav
+                    span.menu
+                    ul.cl-effect-3
+                        li.active
+                            a(href='/') Home
+                        li
+                            a(href='/search') Search
+                        li
+                            a(href='/posts') Publications
+                        .clearfix
+                .header-right1
+                    - if(username) {
+                    li
+                        a#username(href='/profile/#{username}') #{username}
+                    li
+                        a(href='/signout') Sign Out
+                    - } else {
+                    li
+                        a(href='/signin') Sign In
+                    li
+                        a(href='/signup') Sign Up
+                    - }
+                .clearfix
+    .main
+        .contact_top
+            .container
+                .col-md-12.contact_left(ng-app='createVideoTextApp', ng-controller='CreateVideoTextCtrl')
+                    h4 Create Post
+                    p
+                    form
+                        .form_details
+                            label Title:
+                            input.text(type='text', ng-model='post.title', value='Title')
+                            label Description:
+                            input.text(type='text', ng-model='post.description', value='Description')
+                            label Tags:
+                            tags-input.text(type='text', name='tags', ng-model='post.tags', value='Tags')
+                                auto-complete(source='loadTags($query)')
+                            label Link to Video
+                            input.text(type='text', ng-model='post.video', value='Video URL')
+                            label Post Content:
+                            .editor
+                                textarea(ng-model='post.content', name='content', data-provide='markdown', rows='30', value='Markdown')
+                            .posts
+                            .clearfix
+                            #message
+                                h1.text-center.error-message {{ message }}
+                            .sub-button
+                                input(type='submit', value='Save', ng-click='savePost()')
+    .footer-bottom
+        .container
+            p
+                | Copyrights © 2015
+block scripts
+    script(src='/js/markdown.js')
+    script(src='/js/to-markdown.js')
+    script(src='/bootstrap-markdown/js/bootstrap-markdown.js')
+    script(src='/angular/angular.min.js')
+    script(src='/ng-tags-input/ng-tags-input.min.js')
+    script(src='/js/controllers/createVideoTextController.js')

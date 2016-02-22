@@ -1,0 +1,98 @@
+extends layout
+
+block content
+    .header
+        .header-bottom
+            .container
+                .logo
+                    a.img-responsive(href='/')
+                        h1 ItrBlog
+                .head-nav
+                    span.menu
+                    ul.cl-effect-3
+                        li.active
+                            a(href='/') Home
+                        li
+                            a(href='/search') Search
+                        li
+                            a(href='/posts') Publications
+                        .clearfix
+                    script.
+                        $("span.menu").click(function () {
+                            $(".head-nav ul").slideToggle(300, function () {
+                                // Animation complete.
+                            });
+                        });
+                .header-right1
+                    - if(user) {
+                    li
+                        a#username(href='/profile/#{user.username}') #{user.username}
+                    li
+                        a(href='/signout') Sign Out
+                    - } else {
+                    li
+                        a(href='/signin') Sign In
+                    li
+                        a(href='/signup') Sign Up
+                    - }
+                .clearfix
+    .content-top(ng-app='postApp' ng-controller='PostCtrl')
+        .container
+            .single
+                .col-md-8.single-top
+                    h2 {{post.title}}
+                    youtube-video(video-url="video")
+                    h5 {{post.description}}
+                    .sin#content {{post.content}}
+
+                    .sucss-bottom
+                        ul
+                            li
+                                a(href='#')
+                                    i.adm1
+                                    | by&nbsp
+                                    a(href='/profile/{{post.User.username}}') {{post.User.username}}
+                            li
+                                a(href='#')
+                                    i.tag
+                                span
+                                    a(href='', ng-repeat='tag in post.Tags track by $index') {{tag.name}}&nbsp
+                    .respon(ng-controller='CommentsCtrl')
+                        .strator(ng-repeat='comment in comments track by $index')
+                            h4 {{comment.username}}
+                            p {{comment.updatedAt | date: "MM dd yyyy hh:mm:ss"}}
+                            .strator-left
+                                img.img-responsive(src='{{comment.avatar}}', alt='')
+                            .strator-right
+                                p.sin {{comment.content}}
+                            .clearfix
+                            - if (user) {
+                            .rep
+                                a.reply(href='#') REPLY
+                            - }
+                        - if (user) {
+                        .comment
+                            h2 LEAVE A COMMENT
+                            form
+                                textarea(value='Message:', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Message';}", ng-model='comment.content') Message
+                                .smt1
+                                    input(type='submit', value='add a comment', ng-click='saveComment()')
+                        - }
+                .blog-content-right
+                    .b-search
+                        form
+                            input(type='text', value='Search', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Search';}")
+                            input(type='submit', value='')
+    .footer-bottom
+        .container
+            p
+                | Copyrights © 2015
+block scripts
+    script(src='/angular/angular.min.js')
+    script(src='/showdown/dist/showdown.js')
+    script(src='https://www.youtube.com/iframe_api')
+    script(src='/angular-youtube-embed/src/angular-youtube-embed.js')
+    script(src='/js/postApp.js')
+    script(src='/js/controllers/postVideoTextController.js')
+    script(src='/js/controllers/commentController.js')
+    script(src='/js/toHtml.js')
