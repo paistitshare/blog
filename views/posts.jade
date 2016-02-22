@@ -62,7 +62,7 @@ block content
                                             a(href='#', ng-repeat='tag in post.tags track by $index') {{tag.name}}
                                         .clearfix
                                 .blog-artical-info-text
-                                    p {{post.content}}
+                                    p {{post.description}}
                                         a(href='/post/{{post.id}}') [...]
                             .clearfix
                 .blog-content-right

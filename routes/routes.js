@@ -41,8 +41,20 @@ module.exports = function (passport) {
         failureFlash: true
     }));
 
-    router.get('/edit-image-text', function(req, res){
-       res.render('edit-image-text');
+    router.get('/edit-image-text/:postid', isAuthenticated, function(req, res){
+        cloudinary.api.resources(function (items) {
+            res.render('edit-image-text', {username: req.user.username, cloudinary: cloudinary});
+        });
+    });
+
+    router.get('/edit-video-text/:postid', isAuthenticated, function(req, res){
+        res.render('edit-video-text', {user: req.user});
+    });
+
+    router.get('/edit-map-text/:postid', isAuthenticated, function(req, res){
+        cloudinary.api.resources(function (items) {
+            res.render('edit-map-text', {username: req.user.username, cloudinary: cloudinary});
+        });
     });
 
     router.get('/profile', function(req, res){
@@ -124,8 +136,9 @@ module.exports = function (passport) {
     });
 
     router.get('/create-map-text', isAuthenticated, function(req, res) {
-        res.render('create-video-text', {username: req.user.username});
+        res.render('create-map-text', {username: req.user.username});
     });
+
 
     router.post('/createImageTextPost', function(req, res) {
         User.findOne({where: {username: req.body.username}}).then(function (user) {
@@ -143,6 +156,28 @@ module.exports = function (passport) {
                 });
                 Tag.bulkCreate(tagsBulk).then(function (tags) {
                     //tags.setPost(post);
+                    res.send('success');
+                });
+            }).catch(function (err) {
+                if (err) throw err;
+            });
+        });
+    });
+
+    router.post('/editImageTextPost/:postid', function(req, res) {
+        User.findOne({where: {username: req.body.username}}).then(function (user) {
+            Post.update({
+                template: req.body.template,
+                title: req.body.title,
+                description: req.body.description,
+                content: req.body.content,
+                image: req.body.image,
+                UserId: user.id
+            },{where: {id: req.params.postid}}).then(function (post) {
+                var tagsBulk = req.body.tags.map(function (tag) {
+                    return {PostId: post.id, name: tag.text};
+                });
+                Tag.bulkCreate(tagsBulk).then(function (tags) {
                     res.send('success');
                 });
             }).catch(function (err) {
@@ -175,6 +210,28 @@ module.exports = function (passport) {
         });
     });
 
+    router.post('/editVideoTextPost/:postid', function(req, res) {
+        User.findOne({where: {username: req.body.username}}).then(function (user) {
+            Post.update({
+                template: req.body.template,
+                title: req.body.title,
+                description: req.body.description,
+                content: req.body.content,
+                video: req.body.video,
+                UserId: user.id
+            }, {where: {id: req.params.postid}}).then(function (post) {
+                var tagsBulk = req.body.tags.map(function (tag) {
+                    return {PostId: post.id, name: tag.text};
+                });
+                Tag.bulkCreate(tagsBulk).then(function (tags) {
+                    res.send('success');
+                });
+            }).catch(function (err) {
+                if (err) throw err;
+            });
+        });
+    });
+
     router.post('/createMapTextPost', function(req, res) {
         User.findOne({where: {username: req.body.username}}).then(function (user) {
             Post.create({
@@ -185,7 +242,29 @@ module.exports = function (passport) {
                 map: req.body.map,
                 UserId: user.id
             }).then(function (post) {
-                post.setUser([user]);
+                var tagsBulk = req.body.tags.map(function (tag) {
+                    return {PostId: post.id, name: tag.text};
+                });
+                Tag.bulkCreate(tagsBulk).then(function (tags) {
+                    //tags.setPost(post);
+                    res.send('success');
+                });
+            }).catch(function (err) {
+                if (err) throw err;
+            });
+        });
+    });
+
+    router.post('/editMapTextPost/:postid', function(req, res) {
+        User.findOne({where: {username: req.body.username}}).then(function (user) {
+            Post.update({
+                template: req.body.template,
+                title: req.body.title,
+                description: req.body.description,
+                content: req.body.content,
+                map: req.body.map,
+                UserId: user.id
+            }, {where: {id: req.params.postid}}).then(function (post) {
                 var tagsBulk = req.body.tags.map(function (tag) {
                     return {PostId: post.id, name: tag.text};
                 });
@@ -253,6 +332,20 @@ module.exports = function (passport) {
         });
     });
 
+    //router.get('/getPosts', function (req, res){
+    //    Post.findAll({include: [User, Tag]}).then(function(result){
+    //        var posts = result.map(function (post) {
+    //            var tags = post.Tags.map(function (tag) {
+    //                return {name: tag.name};
+    //            });
+    //            return {id: post.id, title: post.title, description: post.description ,updatedAt: post.updatedAt, content: post.content, UserId: post.UserId, username: post.User.username, tags: tags};
+    //        });
+    //        res.send(JSON.stringify(posts));
+    //    }).catch(function(err){
+    //        if (err) throw err;
+    //    });
+    //});
+
     router.get('/getPost/:postid', function (req, res){
         Post.findOne({include: [User, Tag], where: {id: req.params.postid}}).then(function(result){
             var post = result;
@@ -260,7 +353,6 @@ module.exports = function (passport) {
                     return {name: tag.name};
                 });
             post.Tags = tags;
-                //return {id: post.id, title: post.title, description: post.description ,updatedAt: post.updatedAt, content: post.content, UserId: post.UserId, username: post.User.username, tags: tags};
             res.send(JSON.stringify(post));
         }).catch(function(err){
             if (err) throw err;
@@ -290,9 +382,37 @@ module.exports = function (passport) {
         });
     });
 
-    router.get('/getPublications/:username', function(req, res){
-        User.findOne({where: {username: req.params.username}}).then(function(usr) {
+    router.post('/getPublications', function(req, res){
+        User.findOne({where: {username: req.body.username}}).then(function(usr) {
             Post.findAll({include: [User, Tag], where: {UserId: usr.id}}).then(function(result){
+                console.log('/getPublications/:userid: '+ result);
+                var posts = result.map(function (post) {
+                    var tags = post.Tags.map(function (tag) {
+                        return {name: tag.name};
+                    });
+                    return {id: post.id,template: post.template, title: post.title, description: post.description ,updatedAt: post.updatedAt, content: post.content, UserId: post.UserId, username: post.User.username, tags: tags};
+                });
+                console.log('JSON.stringify(posts): ' + JSON.stringify(posts));
+                res.send(JSON.stringify(posts));
+            }).catch(function(err){
+                if (err) throw err;
+            });
+        }).catch(function (err) {
+            if (err) throw err;
+        });
+    });
+
+    router.delete('/deletePost/:postid', function(req, res) {
+        Post.findOne({ id: req.params.postid }).then(function(post) {
+            return post.destroy();
+        }).then(function() {
+            res.send(200);
+        })
+    });
+
+    router.post('/getPublications/:offset', function(req, res){
+        User.findOne({where: {username: req.body.username}}).then(function(usr) {
+            Post.findAll({offset: req.params.offset, limit: 1,include: [User, Tag], where: {UserId: usr.id}}).then(function(result){
                 console.log('/getPublications/:userid: '+ result);
                 var posts = result.map(function (post) {
                     var tags = post.Tags.map(function (tag) {

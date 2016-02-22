@@ -118,7 +118,7 @@ block content
                                         | &nbsp
                                 li.b-tn
                                     .apply_btn
-                                        form(action='create-map-text')
+                                        form(action='/create-map-text')
                                             input(type='submit', value='Choose Template')
                                 .clearfix
                         .col-md-3
@@ -127,8 +127,8 @@ block content
             .container
                 .blog-content(ng-controller='ProfileCtrl')
                     .blog-content-left
-                        .blog-articals
-                            .blog-artical(ng-repeat='post in posts track by $index')
+                        .blog-articals(infinite-scroll='loadMore()' infinite-scroll-distance='1')
+                            .blog-artical(ng-repeat='post in posts')
                                 .blog-artical-basicinfo
                                     ul
                                         li.post-date
@@ -149,28 +149,31 @@ block content
                                                 span
                                                 a(href='', ng-repeat='tag in post.tags track by $index') {{tag.name}}
                                             li
-                                                span.pull-right.edit-post
-                                                    a(href='/edit-image-text')
+                                                span.pull-right.edit-post(ng-if='post.template == "image-text"')
+                                                    a(href='/edit-image-text/{{post.id}}')
+                                                        i.fa.fa-edit.fa-lg
+                                                span.pull-right.edit-post(ng-if='post.template == "video-text"')
+                                                    a(href='/edit-video-text/{{post.id}}')
+                                                        i.fa.fa-edit.fa-lg
+                                                span.pull-right.edit-post(ng-if='post.template == "map-text"')
+                                                    a(href='/edit-map-text/{{post.id}}')
                                                         i.fa.fa-edit.fa-lg
                                             li
                                                 span.pull-right.delete-post
-                                                    a(href='/edit-image-text')
+                                                    a(href='' ng-click='deletePost("{{post.id}}")')
                                                         i.fa.fa-times.fa-lg
                                             .clearfix
                                     .blog-artical-info-text
-                                        p {{post.content}}
+                                        p {{post.description}}
                                             a(href='/post/{{post.id}}') [...]
                                 .clearfix
                     .blog-content-right
-                        .b-search
-                            form
-                                input(type='text', value='Search', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Search';}")
-                                input(type='submit', value='')
     .footer-bottom
         .container
             p
                 | Copyrights © 2015
-            block scripts
-                script(src='/angular/angular.min.js')
-                script(src='/js/controllers/profileController.js')
-                script(src="/js/profile.js")
+block scripts
+    script(src='/angular/angular.min.js')
+    script(src='/ngInfiniteScroll/build/ng-infinite-scroll.min.js')
+    script(src='/js/controllers/profileController.js')
+    script(src="/js/profile.js")

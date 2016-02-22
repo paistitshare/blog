@@ -18,9 +18,9 @@ block content
                             a(href='/posts') Publications
                         .clearfix
                 .header-right1
-                    - if(username) {
+                    - if(user) {
                     li
-                        a#username(href='/profile/#{username}') #{username}
+                        a#username(href='/profile/#{user.username}') #{user.username}
                     li
                         a(href='/signout') Sign Out
                     - } else {
@@ -33,8 +33,8 @@ block content
     .main
         .contact_top
             .container
-                .col-md-12.contact_left(ng-app='editImageTextApp', ng-controller='EditImageTextCtrl')
-                    h4 Create Post
+                .col-md-12.contact_left(ng-app='editVideoTextApp', ng-controller='EditVideoTextCtrl')
+                    h4 Edit Post
                     p
                     form
                         .form_details
@@ -45,6 +45,8 @@ block content
                             label Tags:
                             tags-input.text(type='text', name='tags', ng-model='post.tags', value='Tags')
                                 auto-complete(source='loadTags($query)')
+                            label Link to Video
+                            input.text(type='text', ng-model='post.video', value='Video URL')
                             label Post Content:
                             .editor
                                 textarea(ng-model='post.content', name='content', data-provide='markdown', rows='30', value='Markdown')
@@ -52,12 +54,6 @@ block content
                             .clearfix
                             #message
                                 h1.text-center.error-message {{ message }}
-                            .cont
-                                h4 Drop file to upload post top image
-                                #refresh.preview
-                                form(enctype='multipart/form-data')
-                                span.btn.btn-default.btn-file
-                                    !=cloudinary.uploader.image_upload_tag('image')
                             .sub-button
                                 input(type='submit', value='Save', ng-click='savePost()')
     .footer-bottom
@@ -70,27 +66,4 @@ block scripts
     script(src='/bootstrap-markdown/js/bootstrap-markdown.js')
     script(src='/angular/angular.min.js')
     script(src='/ng-tags-input/ng-tags-input.min.js')
-    script(src='/js/controllers/editImageTextController.js')
-    script(src='/js/jquery.ui.widget.js')
-    script(src='/js/jquery.iframe-transport.js')
-    script(src='/js/jquery.fileupload.js')
-    script(src='/js/jquery.cloudinary.js')
-    script(type='text/javascript').
-        $.cloudinary.config({api_key: '!{api_key}', cloud_name: '!{cloud_name}'});
-        $('.cloudinary-fileupload').bind('fileuploadstart', function (e) {
-        $('.preview').html('Upload started...');
-        });
-        $('.cloudinary-fileupload').bind('cloudinarydone', function (e, data) {
-        $('.preview').html(
-        $.cloudinary.image(data.result.public_id, {
-        format: data.result.format,
-        version: data.result.version,
-        crop: 'scale'
-        })
-        );
-        return true;
-        });
-        $("span.menu").click(function () {
-        $(".head-nav ul").slideToggle(300, function () {
-        });
-        });
+    script(src='/js/controllers/editVideoTextController.js')

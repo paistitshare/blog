@@ -9,6 +9,7 @@ settingsApp.controller('SettingsCtrl', function ($scope, $http, $window) {
             $scope.info.avatar = $('#refresh').children('img')[0].src;
         });
     });
+
      $http.get('/getSettings').then(function(data){
          $scope.info = data;
      }, httpError);

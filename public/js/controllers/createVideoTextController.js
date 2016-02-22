@@ -3,36 +3,23 @@
 
     var createVideoTextApp = angular.module('createVideoTextApp', ['ngTagsInput']);
 
-    createVideoTextApp.controller('CreateVideoTextCtrl', function ($scope, $http, $window) {
+    createVideoTextApp.controller('CreateVideoTextCtrl', function ($scope, $http, $window, $q) {
         angular.element(document).ready(function() {
             $('#refresh').bind("DOMSubtreeModified",function() {
                 $scope.image = $('#refresh').find('img').attr('src');
             });
-            $scope.tags = [
-                { text: 'just' },
-                { text: 'some' },
-                { text: 'cool' },
-                { text: 'tags' }
-            ];
         });
 
+        $http.get('/getTags').then(function(tags){
+            $scope.tags = tags.data;
+        }, httpError);
+
         $scope.loadTags = function(query) {
-            //return $http.get('/getTags?query=' + query);
+            var deferred = $q.defer();
+            deferred.resolve($scope.tags);
+            return deferred.promise;
         };
-        //app.directive("markdownEditor", function () {
-        //    return {
-        //        restrict: "A",
-        //        require:  'ngModel',
-        //        link:     function (scope, element, attrs, ngModel) {
-        //            $(element).markdown({
-        //                savable:false,
-        //                onChange: function(e){
-        //                    ngModel.$setViewValue(e.getContent());
-        //                }
-        //            });
-        //        }
-        //    }
-        //});
+
         $scope.savePost = function(){
             $scope.post.username = $('#username').text();
             $scope.post.tagsBulk = $scope.post.tags.map(function(tag) { return {name: tag.text}});

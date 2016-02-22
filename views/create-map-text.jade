@@ -33,7 +33,7 @@ block content
     .main
         .contact_top
             .container
-                .col-md-12.contact_left(ng-app='editImageTextApp', ng-controller='EditImageTextCtrl')
+                .col-md-12.contact_left(ng-app='createMapTextApp', ng-controller='CreateMapTextCtrl')
                     h4 Create Post
                     p
                     form
@@ -52,12 +52,10 @@ block content
                             .clearfix
                             #message
                                 h1.text-center.error-message {{ message }}
-                            .cont
-                                h4 Drop file to upload post top image
-                                #refresh.preview
-                                form(enctype='multipart/form-data')
-                                span.btn.btn-default.btn-file
-                                    !=cloudinary.uploader.image_upload_tag('image')
+                            .cont#map
+                            label Input coordinates:
+                            input.text(type='text', ng-model='post.map.lat', value='Latitude')
+                            input.text(type='text', ng-model='post.map.lat', value='Longtitude')
                             .sub-button
                                 input(type='submit', value='Save', ng-click='savePost()')
     .footer-bottom
@@ -65,32 +63,11 @@ block content
             p
                 | Copyrights © 2015
 block scripts
+    script(src='/js/googleMap.js')
+    script(async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDX8omW3rl5AvCh0EEVYFujX-7B7nMqw_A&callback=initMap')
     script(src='/js/markdown.js')
     script(src='/js/to-markdown.js')
     script(src='/bootstrap-markdown/js/bootstrap-markdown.js')
     script(src='/angular/angular.min.js')
     script(src='/ng-tags-input/ng-tags-input.min.js')
-    script(src='/js/controllers/editImageTextController.js')
-    script(src='/js/jquery.ui.widget.js')
-    script(src='/js/jquery.iframe-transport.js')
-    script(src='/js/jquery.fileupload.js')
-    script(src='/js/jquery.cloudinary.js')
-    script(type='text/javascript').
-        $.cloudinary.config({api_key: '!{api_key}', cloud_name: '!{cloud_name}'});
-        $('.cloudinary-fileupload').bind('fileuploadstart', function (e) {
-        $('.preview').html('Upload started...');
-        });
-        $('.cloudinary-fileupload').bind('cloudinarydone', function (e, data) {
-        $('.preview').html(
-        $.cloudinary.image(data.result.public_id, {
-        format: data.result.format,
-        version: data.result.version,
-        crop: 'scale'
-        })
-        );
-        return true;
-        });
-        $("span.menu").click(function () {
-        $(".head-nav ul").slideToggle(300, function () {
-        });
-        });
+    script(src='/js/controllers/createMapTextController.js')

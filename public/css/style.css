@@ -4106,3 +4106,7 @@ div.register-bottom-grid {
 .single h4{
     font-wight: 600 !important;
 }
+
+#map {
+    height: 200px;
+}

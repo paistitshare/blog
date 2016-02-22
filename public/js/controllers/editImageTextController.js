@@ -1,15 +1,20 @@
 (function () {
     'use strict';
 
-    var createImageTextApp = angular.module('createImageTextApp', ['ngTagsInput']);
+    var editImageTextApp = angular.module('editImageTextApp', ['ngTagsInput']);
 
-    createImageTextApp.controller('CreateImageTextCtrl', function ($scope, $http, $window, $q) {
+    editImageTextApp.controller('EditImageTextCtrl', function ($scope, $http, $window, $q) {
         angular.element(document).ready(function() {
             $('#refresh').bind("DOMSubtreeModified",function() {
                 $scope.image = $('#refresh').find('img').attr('src');
             });
 
         });
+
+        $scope.param = $window.location.href.substr($window.location.href.lastIndexOf('/') + 1);
+        $http.get('/getPost/' + $scope.param).then(function(post){
+            $scope.post = post.data;
+        }, httpError);
 
         $http.get('/getTags').then(function(tags){
             $scope.tags = tags.data;
@@ -26,7 +31,7 @@
             $scope.post.tagsBulk = $scope.post.tags.map(function(tag) { return {name: tag.text}});
             $scope.post.image = $scope.image;
             $scope.post.template = 'image-text';
-            $http.post('/createImageTextPost', this.post).then(function(data, status) {
+            $http.post('/editImageTextPost/' + $scope.param, this.post).then(function(data, status) {
                 if (data) $window.location.href = '/posts';
             }, httpError);
         };

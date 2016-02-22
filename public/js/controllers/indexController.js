@@ -1,5 +1,5 @@
-var app = angular.module('tagCloudApp', ['angular-jqcloud']);
-app.controller('tagCloudController', function($scope, $http) {
+var app = angular.module('indexApp', ['angular-jqcloud']);
+app.controller('IndexCtrl', function($scope, $http) {
     $http.get('/getTags').then(function(tags){
         $scope.words = tags.data;
     }, function(err){
@@ -10,4 +10,14 @@ app.controller('tagCloudController', function($scope, $http) {
     $scope.update = function() {
         $scope.words.splice(-5);
     };
+});
+app.controller('PostsCtrl', function ($scope, $http, $window) {
+    $http.get('/getPosts').then(function(posts){
+        $scope.posts = posts.data;
+        if(Object.keys(posts.data).length == 0) $scope.message = 'No publications found';
+    }, httpError);
+
+    function httpError(error) {
+        if (error) throw(error);
+    }
 });

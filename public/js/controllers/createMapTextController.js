@@ -1,46 +1,24 @@
 (function () {
     'use strict';
 
-    $(".status-box").markdown({
-        savable:true,
-        onSave: function(e) {
-            $('<li class="col-xs-6 pull-left raw-markdown">').append( e.getContent() ).prependTo('.posts');
-            $('<li class="col-xs-6 pull-right end-markdown">').append( e.parseContent() ).prependTo('.posts');
-        }
-    });
-
     var createMapTextApp = angular.module('createMapTextApp', ['ngTagsInput']);
 
-    app.controller('CreateMapTextCtrl', function ($scope, $http, $window) {
+    createMapTextApp.controller('CreateMapTextCtrl', function ($scope, $http, $window, $q) {
         angular.element(document).ready(function() {
             $('#refresh').bind("DOMSubtreeModified",function() {
                 $scope.image = $('#refresh').find('img').attr('src');
             });
-            $scope.tags = [
-                { text: 'just' },
-                { text: 'some' },
-                { text: 'cool' },
-                { text: 'tags' }
-            ];
         });
 
+        $http.get('/getTags').then(function(tags){
+            $scope.tags = tags.data;
+        }, httpError);
+
         $scope.loadTags = function(query) {
-            //return $http.get('/getTags?query=' + query);
+            var deferred = $q.defer();
+            deferred.resolve($scope.tags);
+            return deferred.promise;
         };
-        //app.directive("markdownEditor", function () {
-        //    return {
-        //        restrict: "A",
-        //        require:  'ngModel',
-        //        link:     function (scope, element, attrs, ngModel) {
-        //            $(element).markdown({
-        //                savable:false,
-        //                onChange: function(e){
-        //                    ngModel.$setViewValue(e.getContent());
-        //                }
-        //            });
-        //        }
-        //    }
-        //});
         $scope.savePost = function(){
             $scope.post.username = $('#username').text();
             $scope.post.tagsBulk = $scope.post.tags.map(function(tag) { return {name: tag.text}});

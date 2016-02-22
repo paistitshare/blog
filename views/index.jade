@@ -41,52 +41,42 @@ block content
                 .clearfix
     // header
     .main
-        .our
+        .blog(ng-app='indexApp')
             .container
-                h5 our process
-                | &#x9;&#x9;&#x9;
-                h2 How We Work for you?
-                | &#x9;&#x9;&#x9;
-                p
-                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                | &#x9;&#x9;&#x9;
-                .our-top
-                    .col-md-4.our-left
-                        i.best
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;
-                        h3 Searching for the best job
-                        | &#x9;
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;
-                        p
-                            | Using the outcomes from the job, we will put together a plan for the most effective marketing strategy to get the best results.
-                    | &#x9;&#x9;&#x9;&#x9;
-                    .col-md-4.our-left
-                        i.resu
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;
-                        h3 Searching for the best job
-                        | &#x9;
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;
-                        p
-                            | Using the outcomes from the job, we will put together a plan for the most effective marketing strategy to get the best results.
-                    | &#x9;&#x9;&#x9;&#x9;
-                    .col-md-4.our-left
-                        i.interv
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;
-                        h3 Searching for the best job
-                        | &#x9;
-                        | &#x9;&#x9;&#x9;&#x9;&#x9;
-                        p
-                            | Using the outcomes from the job, we will put together a plan for the most effective marketing strategy to get the best results.
-                    | &#x9;&#x9;&#x9;&#x9;
-                    .clearfix
-        .recnt
-            .container
-                h3 Tag Cloud
-                .col-md-3
-                .col-md-6(ng-app="tagCloudApp", ng-controller="tagCloudController")
-                    jqcloud.jqcloud(words="words", width='500', height='300', colors='{{colors}}', delay='10', steps='7', font-size='{from:0.09, to:0.04}')
-                .col-md-3
-                .clearfix
+                .blog-content(ng-controller='PostsCtrl')
+                    .blog-content-left
+                        .blog-articals
+                            .blog-artical(ng-repeat='post in posts track by $index')
+                                .blog-artical-basicinfo
+                                    ul
+                                        li.post-date
+                                            p
+                                                span {{post.updatedAt | date: "dd"}}
+                                                label {{post.updatedAt | date: "MMM, yyyy"}}
+                                        .clearfix
+                                .blog-artical-info
+                                    .blog-artical-info-head
+                                        h2
+                                            a(href='/post/{{post.id}}') {{post.title}}
+                                        ul
+                                            li
+                                                i.adm1
+                                                | by
+                                                a(href='/profile/{{post.username}}') {{post.username}}
+                                            li
+                                                span
+                                                a(href='#', ng-repeat='tag in post.tags track by $index') {{tag.name}}
+                                            .clearfix
+                                    .blog-artical-info-text
+                                        p {{post.description}}
+                                            a(href='/post/{{post.id}}') [...]
+                                .clearfix
+                    .blog-content-right
+                        .b-search
+                                h3.center Tag Cloud
+                                .col-m(ng-controller="IndexCtrl")
+                                    jqcloud.jqcloud(words="words", width='250', height='300', colors='{{colors}}', delay='10', steps='7', font-size='{from:0.09, to:0.04}')
+
     .footer-bottom
         .container
             p

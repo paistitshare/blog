@@ -5,5 +5,5 @@ function toHtml() {
 }
 
 $(document).ready(function(){
-    setTimeout(toHtml ,300);
+    setTimeout(toHtml , 300);
 });
